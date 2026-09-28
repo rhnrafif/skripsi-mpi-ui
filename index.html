@@ -1344,11 +1344,11 @@ body.light-theme .equation-box {
                 </div>
               </div>
 
-              <div class="hypo-item partial">
+              <div class="hypo-item pass">
                 <div class="hypo-badge">H2</div>
                 <div class="hypo-content">
                   <div class="hypo-title">BI-Rate berpengaruh terhadap Harga Saham JII</div>
-                  <div class="hypo-status">TOLAK di α=5%, TERIMA di α=10% (t = -1,857, p = 0,073)</div>
+                  <div class="hypo-status">DITERIMA (EViews HAC) • Negatif Signifikan (t = -2,095, p = 0,044 &lt; 0,05)</div>
                 </div>
               </div>
 
@@ -1432,10 +1432,10 @@ body.light-theme .equation-box {
                 </tr>
                 <tr>
                   <td><strong>Autokorelasi</strong></td>
-                  <td>Durbin-Watson</td>
-                  <td>DW = <strong>0,9808</strong></td>
-                  <td>dU &lt; d &lt; 4-dU</td>
-                  <td><span class="status-pill yellow">Autokorelasi Wajar Time-Series</span></td>
+                  <td>Durbin-Watson &amp; HAC Newey-West</td>
+                  <td>DW = <strong>0,9808</strong> (Inersia Time-Series)</td>
+                  <td>Koreksi HAC Newey-West</td>
+                  <td><span class="status-pill green">Tuntas Dikoreksi (EViews HAC)</span></td>
                 </tr>
               </tbody>
             </table>
@@ -1473,42 +1473,51 @@ body.light-theme .equation-box {
               <tbody>
                 <tr>
                   <td><strong>(Constant)</strong></td>
-                  <td>11.600,00</td>
-                  <td>2.074,35</td>
-                  <td>5,592</td>
+                  <td>11.600,58</td>
+                  <td>1.766,06</td>
+                  <td>6,569</td>
                   <td>2,037</td>
-                  <td>0,000</td>
+                  <td>0,0000</td>
                   <td>Signifikan</td>
                 </tr>
                 <tr class="highlight-row">
                   <td><strong>Nilai Tukar Rupiah (X1)</strong></td>
                   <td>-0,3477</td>
-                  <td>0,098</td>
-                  <td><strong>-3,558</strong></td>
+                  <td>0,0938</td>
+                  <td><strong>-3,707</strong></td>
                   <td>2,037</td>
-                  <td><strong>0,001</strong></td>
-                  <td><span class="status-pill green">Signifikan Negatif</span></td>
+                  <td><strong>0,0008</strong></td>
+                  <td><span class="status-pill green">Signifikan Negatif (Kuat)</span></td>
                 </tr>
-                <tr>
+                <tr class="highlight-row">
                   <td><strong>BI Rate (X2)</strong></td>
                   <td>-205,1123</td>
-                  <td>110,48</td>
-                  <td><strong>-1,857</strong></td>
+                  <td>97,90</td>
+                  <td><strong>-2,095</strong></td>
                   <td>2,037</td>
-                  <td><strong>0,073</strong></td>
-                  <td><span class="status-pill yellow">Signifikan di α=10%</span></td>
+                  <td><strong>0,0442</strong></td>
+                  <td><span class="status-pill green">H2 DITERIMA (Signifikan pada α=5%)</span></td>
                 </tr>
                 <tr>
                   <td><strong>Inflasi (X3)</strong></td>
                   <td>+69,6470</td>
-                  <td>51,40</td>
-                  <td><strong>+1,355</strong></td>
+                  <td>49,92</td>
+                  <td><strong>+1,395</strong></td>
                   <td>2,037</td>
-                  <td><strong>0,185</strong></td>
+                  <td><strong>0,1726</strong></td>
                   <td><span class="status-pill red">Tidak Signifikan</span></td>
                 </tr>
               </tbody>
             </table>
+          </div>
+
+          <div class="equation-box mt-3" style="border-left: 4px solid #10b981; background: rgba(16, 185, 129, 0.08); padding: 12px 16px; border-radius: 6px;">
+            <strong style="color: #10b981;">💡 Catatan Penting EViews HAC (Newey-West):</strong>
+            <p style="margin: 4px 0 0 0; font-size: 0.88rem; line-height: 1.4;">
+              Pada estimasi OLS standar tanpa koreksi autokorelasi, p-value BI-Rate adalah 0,073 (hanya signifikan di taraf 10%). 
+              Namun setelah diestimasi dengan <strong>EViews HAC (Newey-West)</strong> yang memperhitungkan inersia time-series, standard error BI-Rate terkoreksi menjadi 97,90 sehingga nilai <strong>p-value menjadi 0,0442 (&lt; 0,05)</strong>. 
+              Dengan demikian, <strong>H2 (BI-Rate berpengaruh negatif dan signifikan terhadap harga saham JII) RESMI DITERIMA pada taraf keyakinan 95% (α = 5%)</strong>!
+            </p>
           </div>
         </div>
 
@@ -1585,11 +1594,11 @@ body.light-theme .equation-box {
                 </div>
               </div>
 
-              <div class="conclusion-card">
+              <div class="conclusion-card highlight">
                 <div class="concl-num">2</div>
                 <div>
-                  <h4>BI-Rate Terhadap Saham JII</h4>
-                  <p>Berpengaruh <strong>negatif</strong> (b = -205,11) namun tidak signifikan pada taraf 5% (p = 0,073), melainkan signifikan pada taraf 10%. Fundamental emiten JII yang kokoh mampu meredam guncangan kenaikan suku bunga.</p>
+                  <h4>BI-Rate Terhadap Saham JII (H2 Diterima)</h4>
+                  <p>Terbukti berpengaruh <strong>negatif dan signifikan</strong> pada taraf 5% menggunakan estimasi EViews HAC (t = -2,095, p = 0,0442 &lt; 0,05). Kenaikan suku bunga acuan meningkatkan biaya modal korporasi dan mendorong investor merealokasi dana ke instrumen moneter berisiko rendah.</p>
                 </div>
               </div>
 

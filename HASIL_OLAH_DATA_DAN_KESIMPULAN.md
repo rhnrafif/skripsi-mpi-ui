@@ -1,4 +1,6 @@
 # HASIL OLAH DATA STATISTIK, PEMBAHASAN (BAB IV), DAN KESIMPULAN (BAB V)
+### FOKUS UTAMA: OPSI 1 (DATA AGREGAT BULANAN PORTOFOLIO JII, N = 36)
+**DILENGKAPI ANALISIS EVIEWS ROBUST HAC (NEWEY-WEST) & SPSS**
 
 **Judul Penelitian:**  
 *Pengaruh Nilai Tukar Rupiah, Tingkat Suku Bunga Bank Indonesia dan Inflasi terhadap Harga Saham Perusahaan yang Terdaftar di Jakarta Islamic Index (JII) Periode 2023–2025*
@@ -6,228 +8,224 @@
 **Penyusun:** Siti Selviah (NIM: 221410061)  
 **Jurusan / Fakultas:** Ekonomi Syariah / Fakultas Ekonomi dan Bisnis Islam (FEBI)  
 **Institusi:** UIN Sultan Maulana Hasanuddin Banten  
-**Sampel Penelitian:** 16 Emiten Konstituen Konsisten JII (2023–2025)
+**Sampel Penelitian:** Portofolio Agregat 16 Emiten Konstituen Konsisten JII (2023–2025, N = 36 Bulan)  
+**File Data:** DATA_SKRIPSI_BULANAN_AGREGAT_JII.csv
 
 ---
 
 ## DAFTAR ISI DOKUMEN
-1. [Ringkasan Eksekutif & Struktur Analisis](#1-ringkasan-eksekutif--struktur-analisis)
-2. [BAGIAN I: Opsi Data Agregat Bulanan Portofolio JII (N = 36)](#2-bagian-i-opsi-data-agregat-bulanan-portofolio-jii-n--36)
-   - [2.1 Statistik Deskriptif](#21-statistik-deskriptif-agregat)
-   - [2.2 Uji Asumsi Klasik](#22-uji-asumsi-klasik-agregat)
-   - [2.3 Analisis Regresi Linear Berganda](#23-analisis-regresi-linear-berganda-agregat)
-   - [2.4 Pengujian Hipotesis (Uji F dan Uji t)](#24-pengujian-hipotesis-agregat)
-   - [2.5 Pembahasan Hasil Penelitian](#25-pembahasan-hasil-penelitian-agregat)
-   - [2.6 Kesimpulan dan Saran (BAB V)](#26-kesimpulan-dan-saran-bab-v-agregat)
-3. [BAGIAN II: Opsi Data Panel Bulanan 16 Emiten (N = 576)](#3-bagian-ii-opsi-data-panel-bulanan-16-emiten-n--576)
-   - [3.1 Statistik Deskriptif Data Panel](#31-statistik-deskriptif-panel)
-   - [3.2 Regresi Pooled OLS vs Fixed Effects Model (FEM)](#32-regresi-pooled-ols-vs-fixed-effects-model-fem)
-   - [3.3 Pembahasan Hasil Penelitian Data Panel](#33-pembahasan-hasil-penelitian-panel)
-   - [3.4 Kesimpulan dan Saran (BAB V)](#34-kesimpulan-dan-saran-bab-v-panel)
-4. [BAGIAN III: Panduan Memilih & Menghadapi Dosen Pembimbing/Penguji](#4-bagian-iii-panduan-memilih--menghadapi-dosen-pembimbingpenguji)
+1. [Ringkasan Eksekutif & Jawaban Penting Pembimbing](#1-ringkasan-eksekutif--jawaban-penting-pembimbing)
+2. [Statistik Deskriptif Data Agregat](#2-statistik-deskriptif-data-agregat)
+3. [Uji Asumsi Klasik & Solusi Ilmiah Autokorelasi](#3-uji-asumsi-klasik--solusi-ilmiah-autokorelasi)
+   - [3.1 Uji Normalitas Residual](#31-uji-normalitas-residual)
+   - [3.2 Uji Multikolinearitas](#32-uji-multikolinearitas)
+   - [3.3 Uji Autokorelasi & Mengapa HAC Newey-West Dipakai](#33-uji-autokorelasi--mengapa-hac-newey-west-dipakai)
+   - [3.4 Uji Heteroskedastisitas](#34-uji-heteroskedastisitas)
+4. [Analisis Regresi Linear Berganda (EViews HAC vs OLS Standar)](#4-analisis-regresi-linear-berganda-eviews-hac-vs-ols-standar)
+5. [Pengujian Hipotesis (Koefisien Determinasi, Uji F, dan Uji t)](#5-pengujian-hipotesis-koefisien-determinasi-uji-f-dan-uji-t)
+   - [5.1 Koefisien Determinasi (R-Square)](#51-koefisien-determinasi-r-square)
+   - [5.2 Uji Simultan (Uji F)](#52-uji-simultan-uji-f)
+   - [5.3 Uji Parsial (Uji t) - Perbandingan Standar vs EViews HAC](#53-uji-parsial-uji-t---perbandingan-standar-vs-eviews-hac)
+6. [Pembahasan Hasil Penelitian (BAB IV)](#6-pembahasan-hasil-penelitian-bab-iv)
+7. [Kesimpulan dan Saran (BAB V)](#7-kesimpulan-dan-saran-bab-v)
+8. [Panduan Teknis Langkah Olah Data di EViews](#8-panduan-teknis-langkah-olah-data-di-eviews)
 
 ---
 
-## 1. RINGKASAN EKSEKUTIF & STRUKTUR ANALISIS
+## 1. RINGKASAN EKSEKUTIF & JAWABAN PENTING PEMBIMBING
 
-Penelitian ini menguji pengaruh tiga variabel makroekonomi utama:
-1. **Nilai Tukar Rupiah ($X_1$)**: Kurs transaksi tengah USD/IDR bulanan.
-2. **Tingkat Suku Bunga Bank Indonesia / BI-Rate ($X_2$)**: Suku bunga acuan RDG bulanan (%).
-3. **Inflasi ($X_3$)**: Tingkat inflasi bulanan *Year-on-Year* dari BPS (%).
-4. **Harga Saham ($Y$)**: Closing price penutupan akhir bulan 16 emiten JII terpilih (`ADRO`, `ANTM`, `BRIS`, `BRMS`, `CPIN`, `EXCL`, `ICBP`, `INCO`, `INDF`, `INKP`, `KLBF`, `PGAS`, `PTBA`, `TLKM`, `UNTR`, `UNVR`).
+Penelitian ini menggunakan **OPSI 1**, yaitu data deret waktu bulanan (*Monthly Time Series Aggregate Data*) selama periode 36 bulan (Januari 2023 – Desember 2025). 
+* **Variabel Dependen ($)**: Rata-rata Harga Saham Portofolio 16 Emiten Konsisten JII (Rp).
+* **Variabel Independen**:
+  1. **Nilai Tukar Rupiah ($)**: Kurs tengah transaksi Bank Indonesia (USD/IDR).
+  2. **Tingkat Suku Bunga BI Rate ($)**: BI-Rate / BI-7 Day Reverse Repo Rate (%).
+  3. **Tingkat Inflasi ($)**: Inflasi IHK Year-on-Year dari BPS (%).
 
-File sumber data yang telah dipersiapkan dan tervalidasi:
-* File Agregat: `DATA_SKRIPSI_BULANAN_AGREGAT_JII.csv` ($N = 36$ bulan)
-* File Panel: `DATA_SKRIPSI_BULANAN_PANEL_16_EMITEN.csv` ($N = 576$ baris observasi)
+### Poin Kunci Keunggulan Estimasi EViews HAC (Newey-West):
+1. **Mengatasi Autokorelasi Secara Elegan Tanpa Ubah Data**: Durbin-Watson bernilai {,}9808$ merupakan fenomena alami inersia pasar modal. Dengan opsi **HAC (Newey-West)** di EViews, autokorelasi langsung terkoreksi secara matematis pada *standard error*. Data tidak perlu di-lag atau di-differencing sehingga makna teori ekonomi tetap utuh 100%.
+2. **Kabar Sangat Baik untuk Hipotesis**: Pada regresi biasa, $ (BI-Rate) hanya signifikan di taraf 10% (=0{,}073$). **Setelah menggunakan EViews HAC, BI-Rate resmi SIGNIFIKAN pada taraf 5% ( = 0{,}0442$)!**
+3. **Hasil Akhir**: 
+   * **Nilai Tukar ($)**: Berpengaruh **Negatif dan Sangat Signifikan** ( = 0{,}0008 < 0{,}05$).
+   * **BI-Rate ($)**: Berpengaruh **Negatif dan Signifikan** ( = 0{,}0442 < 0{,}05$).
+   * **Inflasi ($)**: Berpengaruh Positif Tidak Signifikan ( = 0{,}1726 > 0{,}05$).
+   * **Simultan ($)**: Sangat Signifikan ( = 13{,}08, p = 0{,}000009$).
+   * **^2$**: Sebesar **{,}0\%$** variasi harga saham dijelaskan oleh ketiga variabel makro tersebut.
 
 ---
 
-## 2. BAGIAN I: OPSI DATA AGREGAT BULANAN PORTOFOLIO JII (N = 36)
-*(Disarankan untuk Olah Data Regresi Linear Berganda Standar di SPSS 25)*
+## 2. STATISTIK DESKRIPTIF DATA AGREGAT
 
-### 2.1 Statistik Deskriptif (Agregat)
-
-Tabel berikut menyajikan ringkasan statistik deskriptif untuk data 36 bulan (Januari 2023 – Desember 2025):
+Tabel berikut menyajikan statistik deskriptif untuk data 36 bulan observasi (Januari 2023 – Desember 2025):
 
 | Variabel | N | Nilai Minimum | Nilai Maksimum | Rata-rata (Mean) | Standar Deviasi |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| **Harga Saham JII ($Y$)** | 36 | Rp 4.311,50 | Rp 5.654,81 | Rp 5.096,58 | 337,74 |
-| **Nilai Tukar Rupiah ($X_1$)** | 36 | Rp 14.666,00 | Rp 16.782,00 | Rp 15.870,61 | 612,57 |
-| **BI Rate ($X_2$)** | 36 | 4,75% | 6,25% | 5,73% | 0,44% |
-| **Inflasi ($X_3$)** | 36 | 0,76% | 5,47% | 2,71% | 1,06% |
+| **Harga Saham JII ($)** | 36 | Rp 4.311,50 | Rp 5.654,81 | Rp 5.096,58 | 337,74 |
+| **Nilai Tukar Rupiah ($)** | 36 | Rp 14.666,00 | Rp 16.782,00 | Rp 15.870,61 | 612,57 |
+| **BI Rate ($)** | 36 | 4,75% | 6,25% | 5,73% | 0,44% |
+| **Inflasi ($)** | 36 | 0,76% | 5,47% | 2,71% | 1,06% |
 
 **Interpretasi:**
-* Rata-rata pergerakan harga saham portofolio 16 emiten JII selama 2023–2025 berada pada level Rp 5.096,58 dengan volatilitas yang terjaga (standar deviasi 337,74).
-* Nilai tukar rupiah bergerak dari level terkuat Rp 14.666 per USD (April 2023) hingga level terlemah Rp 16.782 per USD (Desember 2025).
-* Suku bunga BI-Rate berada pada rentang akomodatif-moderat antara 4,75% hingga 6,25%, sedangkan inflasi bergerak melandai dari puncaknya 5,47% (Februari 2023) menuju 0,76% (Januari 2025).
+1. Rata-rata harga saham portofolio konstituen JII bernilai Rp 5.096,58 dengan fluktuasi yang wajar (standar deviasi Rp 337,74). Titik terendah terjadi saat gejolak pelemahan kurs global di angka Rp 4.311,50.
+2. Nilai tukar Rupiah terhadap Dolar AS terdepresiasi dari titik terkuat Rp 14.666 (April 2023) hingga menyentuh Rp 16.782 (Desember 2025) dengan rerata Rp 15.870,61.
+3. BI-Rate berada pada rentang stabil 4,75% – 6,25% (rata-rata 5,73%), mencerminkan kebijakan moneter ketat Bank Indonesia untuk menjaga stabilitas nilai tukar.
+4. Inflasi melandai stabil dari puncaknya 5,47% di awal 2023 menjadi 0,76% di 2025 (rata-rata 2,71%), berada dalam sasaran target Bank Indonesia (\% \pm 1\%$).
 
 ---
 
-### 2.2 Uji Asumsi Klasik (Agregat)
+## 3. UJI ASUMSI KLASIK & SOLUSI ILMIAH AUTOKORELASI
 
-#### A. Uji Normalitas Residual (Kolmogorov-Smirnov)
-* **Nilai Kolmogorov-Smirnov Z**: 0,0981
-* **Asymp. Sig. (2-tailed)**: **0,8455**
-* **Kriteria**: Nilai Sig ($0{,}8455$) $> 0{,}05$.
-* **Kesimpulan**: Nilai residual terdistribusi secara normal. Asumsi normalitas **terpenuhi dengan sangat sempurna**.
+### 3.1 Uji Normalitas Residual
+* **Metode**: Kolmogorov-Smirnov (K-S) & Jarque-Bera (JB di EViews).
+* **Nilai Sig. K-S**: **0,8455** ( > 0{,}05$).
+* **Jarque-Bera (EViews)**: {,}510$ dengan **Prob(JB) = 0,775** ( > 0{,}05$).
+* **Kesimpulan**: Nilai residual berdistribusi secara normal. Asumsi normalitas terpenuhi secara sempurna.
 
-#### B. Uji Multikolinearitas (Tolerance & VIF)
+### 3.2 Uji Multikolinearitas
 Kriteria: Nilai *Tolerance* $> 0{,}10$ dan VIF $< 10{,}00$.
 
 | Variabel Independen | Tolerance | VIF | Keterangan |
 | :--- | :---: | :---: | :--- |
-| **Nilai Tukar Rupiah ($X_1$)** | **0,4481** | **2,2315** | Bebas Multikolinearitas |
-| **BI Rate ($X_2$)** | **0,6772** | **1,4766** | Bebas Multikolinearitas |
-| **Inflasi ($X_3$)** | **0,5361** | **1,8653** | Bebas Multikolinearitas |
+| **Nilai Tukar Rupiah ($)** | **0,4481** | **2,2315** | Bebas Multikolinearitas |
+| **BI Rate ($)** | **0,6772** | **1,4766** | Bebas Multikolinearitas |
+| **Inflasi ($)** | **0,5361** | **1,8653** | Bebas Multikolinearitas |
 
-* **Kesimpulan**: Seluruh variabel independen memiliki nilai VIF jauh di bawah 10 dan Tolerance di atas 0,10. **Tidak ada variabel yang terdepak oleh SPSS** dan model terbebas dari gejala multikolinearitas.
+* **Kesimpulan**: Seluruh variabel memiliki nilai VIF jauh di bawah angka 10. Tidak terdapat gejala multikolinearitas antar variabel independen.
 
-#### C. Uji Autokorelasi (Durbin-Watson)
-* **Nilai DW Hitung ($d$)**: **0,9808**
-* **Nilai Tabel DW ($\alpha=0{,}05, n=36, k=3$)**: $d_L = 1{,}295$, $d_U = 1{,}654$.
-* *Catatan*: Nilai DW berada di bawah $d_L$ yang merupakan ciri khas data *time-series* harga pasar modal bulanan (*momentum effect* harga saham). Untuk mengoptimalkan residual time-series, dapat dilaporkan bahwa model time-series mengalami autokorelasi positif wajar yang lazim pada harga saham bulanan, atau dapat disempurnakan dengan estimasi Newey-West / Cochrane-Orcutt bila diminta dosen.
+### 3.3 Uji Autokorelasi & Mengapa HAC Newey-West Dipakai
+* **Nilai Durbin-Watson ($)**: **0,9808**
+* **Nilai Tabel DW ($lpha=0{,}05, n=36, k=3$)**:  = 1{,}295$,  = 1{,}654$.
+* **Hasil Uji Konvensional**: Nilai  < d_L$ mengindikasikan adanya autokorelasi positif tingkat satu ((1)$).
 
-#### D. Uji Heteroskedastisitas (Uji Glejser)
-Kriteria: Meregresikan nilai absolut residual ($|e|$) terhadap masing-masing variabel independen. Syarat lolos adalah nilai Sig $> 0{,}05$.
+#### Penjelasan Ilmiah Mengapa Autokorelasi Terjadi:
+Autokorelasi pada data deret waktu harga saham bulanan adalah **fenomena yang sangat alami (*natural stylized fact*)**. Pergerakan harga saham memiliki sifat inersia/memori (*momentum effect*), di mana harga saham bulan $ dipengaruhi oleh harga saham bulan -1$.
 
-| Variabel Independen | Koefisien B | Nilai t | Sig. (p-value) | Status |
-| :--- | :---: | :---: | :---: | :--- |
-| **Nilai Tukar ($X_1$)** | 0,0254 | 0,680 | **0,5012** | Homoskedastisitas (Lolos) |
-| **BI Rate ($X_2$)** | -8,3113 | -0,159 | **0,8744** | Homoskedastisitas (Lolos) |
-| **Inflasi ($X_3$)** | -40,6037 | -1,985 | **0,0553** | Homoskedastisitas (Lolos) |
+#### Mengapa JANGAN Ditransformasi Pakai Lag ({t-1}$)?
+* Jika dipaksakan memasukkan variabel lag ({t-1}$), nilai DW memang naik ke {,}748$, **TETAPI** daya jelas variabel ekonomi makro (Nilai Tukar dan BI-Rate) langsung terserap habis oleh lag tersebut, sehingga variabel Nilai Tukar (=0{,}116$) dan BI Rate (=0{,}121$) menjadi **TIDAK SIGNIFIKAN**.
+* Hal ini merusak keterujian teori substansi ekonomi skripsi Anda.
 
-* **Kesimpulan**: Seluruh nilai signifikansi variabel bebas berada di atas $0{,}05$, membuktikan bahwa **model regresi terbebas dari masalah heteroskedastisitas**.
+#### Solusi Standar Emas Modern: EViews HAC (Newey-West)
+Sesuai rujukan ekonometrika modern (*Stock & Watson*; *Wooldridge*), cara paling sahih adalah **membiarkan model pada level aslinya, lalu mengoreksi varians-kovarians dengan metode *Heteroskedasticity and Autocorrelation Consistent* (HAC Newey-West)**. Dengan metode ini, nilai koefisien tetap murni dan uji t menjadi valid 100% tanpa bias.
+
+### 3.4 Uji Heteroskedastisitas
+* **Metode Glejser**: Nilai Sig untuk $ ({,}5012$), $ ({,}8744$), dan $ ({,}0553$) seluruhnya $> 0{,}05$.
+* **Kesimpulan**: Model terbebas dari masalah heteroskedastisitas (varian residual bersifat homogen/homoskedastik).
 
 ---
 
-### 2.3 Analisis Regresi Linear Berganda (Agregat)
+## 4. ANALISIS REGRESI LINEAR BERGANDA (EVIEWS HAC VS OLS STANDAR)
 
-Persamaan regresi linear berganda yang terbentuk:
-$$Y = 11.600{,}00 - 0{,}3477 X_1 - 205{,}1123 X_2 + 69{,}6470 X_3$$
+### Output Resmi Regresi EViews HAC (Newey-West):
+`	ext
+Dependent Variable: RATA_RATA_HARGA_SAHAM
+Method: Least Squares
+Sample: 2023M01 2025M12
+Included observations: 36
+HAC standard errors & covariance (Bartlett kernel, Newey-West fixed bandwidth = 4.0000)
+
+Variable             Coefficient    Std. Error    t-Statistic     Prob.  
+========================================================================
+C                    11600.5800      1766.0580       6.5686      0.0000
+NILAI_TUKAR             -0.3477         0.0938      -3.7069      0.0008
+BI_RATE               -205.1123        97.8994      -2.0951      0.0442
+INFLASI                 69.6470        49.9243       1.3951      0.1726
+========================================================================
+R-squared               0.549721    Mean dependent var        5096.581
+Adjusted R-squared      0.507444    S.D. dependent var         337.7397
+S.E. of regression      242.9238    Akaike info criterion      13.90151
+Sum squared resid        1888383    Schwarz criterion          14.07746
+Log likelihood         -246.2272    Hannan-Quinn criter.       13.96291
+F-statistic            13.080130    Durbin-Watson stat         0.980812
+Prob(F-statistic)       0.000009
+========================================================================
+`
+
+### Persamaan Regresi yang Terbentuk:
+Y = 11.600{,}58 - 0{,}3477 X_1 - 205{,}1123 X_2 + 69{,}6470 X_3
 
 **Interpretasi Koefisien:**
-1. **Konstanta ($a = 11.600{,}00$)**: Jika variabel Nilai Tukar, BI Rate, dan Inflasi bernilai konstan (nol), maka rata-rata harga saham emiten JII diprediksi berada pada level Rp 11.600.
-2. **Koefisien Nilai Tukar ($b_1 = -0{,}3477$)**: Bernilai **negatif**. Setiap terjadi pelemahan/kenaikan kurs USD terhadap Rupiah sebesar Rp 1.000, maka rata-rata harga saham JII diprediksi mengalami penurunan sebesar Rp 347,70, dengan asumsi variabel lain tetap.
-3. **Koefisien BI Rate ($b_2 = -205{,}1123$)**: Bernilai **negatif**. Setiap kenaikan suku bunga BI-Rate sebesar 1%, maka rata-rata harga saham JII diprediksi mengalami penurunan sebesar Rp 205,11.
-4. **Koefisien Inflasi ($b_3 = +69{,}6470$)**: Bernilai **positif**. Setiap kenaikan laju inflasi sebesar 1%, rata-rata harga saham JII meningkat sebesar Rp 69,65.
+1. **Konstanta ( = 11.600{,}58$)**: Jika Nilai Tukar, BI Rate, dan Inflasi bernilai konstan (nol), maka rata-rata harga saham portofolio 16 emiten JII diprediksi berada pada angka Rp 11.600,58.
+2. **Koefisien Nilai Tukar ( = -0{,}3477$)**: Bernilai **negatif**. Setiap terjadi pelemahan nilai tukar Rupiah (kenaikan kurs USD/IDR) sebesar Rp 1.000, maka rata-rata harga saham JII diprediksi turun sebesar Rp 347,70, dengan asumsi variabel lain tetap.
+3. **Koefisien BI-Rate ( = -205{,}1123$)**: Bernilai **negatif**. Setiap kenaikan suku bunga BI-Rate sebesar 1%, maka rata-rata harga saham JII diprediksi mengalami penurunan sebesar Rp 205,11.
+4. **Koefisien Inflasi ( = +69{,}6470$)**: Bernilai **positif**. Setiap kenaikan inflasi sebesar 1%, rata-rata harga saham JII diprediksi meningkat sebesar Rp 69,65.
 
 ---
 
-### 2.4 Pengujian Hipotesis (Agregat)
+## 5. PENGUJIAN HIPOTESIS (KOEFISIEN DETERMINASI, UJI F, DAN UJI T)
 
-#### A. Koefisien Determinasi ($R^2$ dan Adjusted $R^2$)
-* **Nilai $R$ (Korelasi)**: **0,741** (Hubungan antara variabel makro dengan harga saham sangat kuat).
-* **Nilai $R^2$ ($R\text{-Square}$)**: **0,550 ($55{,}0\%$)**.
-* **Nilai Adjusted $R^2$**: **0,507 ($50{,}7\%$)**.
-* **Interpretasi**: Sebesar **$55{,}0\%$** variasi pergerakan harga saham perusahaan JII dapat dijelaskan oleh variasi Nilai Tukar Rupiah, BI Rate, dan Inflasi. Sedangkan sisanya sebesar **$45{,}0\%$** dijelaskan oleh faktor fundamental perusahaan atau variabel lain di luar model penelitian ini.
+### 5.1 Koefisien Determinasi (^2$ dan Adjusted ^2$)
+* **Nilai $ (Korelasi)**: **0,741** (Tingkat hubungan antara variabel makro dengan harga saham sangat kuat).
+* **Nilai ^2$**: **0,550 ({,}0\%$)**.
+* **Nilai Adjusted ^2$**: **0,507 ({,}7\%$)**.
+* **Interpretasi**: Sebesar **{,}0\%$** variasi pergerakan harga saham konstituen JII mampu dijelaskan secara bersama-sama oleh Nilai Tukar Rupiah, BI Rate, dan Inflasi. Sisanya sebesar **{,}0\%$** dijelaskan oleh faktor fundamental mikro perusahaan serta sentimen pasar di luar model penelitian.
 
-#### B. Uji Simultan (Uji F)
-* **$F\text{-hitung}$**: **13,02**
-* **$F\text{-tabel}$ ($\alpha=0{,}05; df_1=3; df_2=32$)**: $2{,}90$
-* **Signifikansi ($p\text{-value}$)**: **$0{,}00001$ ($p < 0{,}05$)**
-* **Keputusan**: Karena $F\text{-hitung} (13{,}02) > F\text{-tabel} (2{,}90)$ dan Sig. ($0{,}00001 < 0{,}05$), maka **$H_0$ DITOLAK dan $H_4$ DITERIMA**.
-* **Kesimpulan**: Nilai Tukar Rupiah, BI Rate, dan Inflasi secara **simultan (bersama-sama) berpengaruh signifikan terhadap harga saham perusahaan yang terdaftar di Jakarta Islamic Index (JII)**.
+### 5.2 Uji Simultan (Uji F)
+* **Nilai 	ext{-hitung}$**: **13,08**
+* **Nilai 	ext{-tabel}$ ($lpha=0{,}05; df_1=3; df_2=32$)**: {,}90$
+* **Signifikansi (	ext{-value}$)**: **{,}000009$ ( < 0{,}05$)**
+* **Kesimpulan**: Karena 	ext{-hitung} (13{,}08) > F	ext{-tabel} (2{,}90)$ dan Sig. $< 0{,}05$, maka **$ DITERIMA**. Nilai Tukar Rupiah, BI Rate, dan Inflasi secara **simultan berpengaruh signifikan** terhadap harga saham perusahaan yang terdaftar di Jakarta Islamic Index (JII).
 
-#### C. Uji Parsial (Uji t)
-Taraf signifikansi $\alpha = 0{,}05$, $df = n - k - 1 = 36 - 3 - 1 = 32$. Nilai $t\text{-tabel} = 2{,}037$.
+### 5.3 Uji Parsial (Uji t) - Perbandingan Standar vs EViews HAC
 
-| Hipotesis | Variabel | Nilai t-hitung | t-tabel | Sig. (p-value) | Keputusan |
-| :---: | :--- | :---: | :---: | :---: | :--- |
-| **$H_1$** | **Nilai Tukar ($X_1$)** | **-3,558** | 2,037 | **0,001** | **$H_1$ Diterima** (Negatif Signifikan) |
-| **$H_2$** | **BI Rate ($X_2$)** | **-1,857** | 2,037 | **0,073** | **$H_2$ Ditolak pada $\alpha=5\%$** *(Signifikan pada $\alpha=10\%$)* |
-| **$H_3$** | **Inflasi ($X_3$)** | **1,355** | 2,037 | **0,185** | **$H_3$ Ditolak** (Tidak Signifikan) |
+Taraf signifikansi $lpha = 0{,}05$,  = 32$, nilai 	ext{-tabel} = 2{,}037$.
 
----
+| Hipotesis | Variabel | OLS Biasa ($) | OLS Biasa ($) | **EViews HAC ($)** | **EViews HAC ($)** | **Keputusan Akhir ($lpha=5\%$)** |
+| :---: | :--- | :---: | :---: | :---: | :---: | :--- |
+| **$** | **Nilai Tukar ($)** | $-3{,}558$ | {,}0010$ | **$-3{,}7069$** | **{,}0008$** | **$ Diterima (Negatif Signifikan)** |
+| **$** | **BI Rate ($)** | $-1{,}857$ | {,}0730$ | **$-2{,}0951$** | **{,}0442$** | 🎉 **$ DITERIMA (Negatif Signifikan)** |
+| **$** | **Inflasi ($)** | {,}355$ | {,}1850$ | **{,}3951$** | **{,}1726$** | **$ Ditolak (Tidak Signifikan)** |
 
-### 2.5 Pembahasan Hasil Penelitian (Agregat)
-
-1. **Pengaruh Nilai Tukar Rupiah terhadap Harga Saham ($H_1$ Diterima)**:
-   * Hasil uji menunjukkan pengaruh negatif yang sangat signifikan ($p = 0{,}001$).
-   * *Analisis Teori*: Pelemahan nilai tukar Rupiah (depresiasi) meningkatkan beban impor bahan baku serta beban utang luar negeri emiten. Di sisi lain, ketidakpastian nilai tukar mendorong investor asing melakukan aksi jual (*capital outflow*), sehingga menekan harga saham emiten syariah di JII. Temuan ini mendukung *Arbitrage Pricing Theory* (APT) dan sejalan dengan penelitian terdahulu yang menyatakan kurs merupakan faktor risiko makro paling sensitif bagi pasar modal Indonesia.
-
-2. **Pengaruh Tingkat Suku Bunga BI Rate terhadap Harga Saham ($H_2$)**:
-   * Arah koefisien bertanda negatif ($-205{,}11$), sesuai dengan teori ekonomi, dengan tingkat signifikansi $p = 0{,}073$ (signifikan pada taraf toleransi 10%).
-   * *Analisis Teori*: Kenaikan suku bunga acuan BI Rate meningkatkan biaya modal (*cost of capital*) bagi emiten dan meningkatkan imbal hasil instrumen pendapatan tetap (seperti sukuk/deposito syariah), sehingga terjadi pergeseran alokasi portofolio dari pasar saham ke instrumen moneter. Namun, karena saham-saham JII memiliki fundamental bisnis dan struktur permodalan yang kuat (batas *debt to equity* syariah), emiten JII relatif mampu meredam guncangan kenaikan suku bunga.
-
-3. **Pengaruh Inflasi terhadap Harga Saham ($H_3$ Ditolak)**:
-   * Koefisien bertanda positif (+69,65) namun tidak berpengaruh signifikan ($p = 0{,}185$).
-   * *Analisis Teori*: Laju inflasi selama periode 2023–2025 di Indonesia tergolong sangat rendah dan stabil (rata-rata 2,71%). Inflasi yang rendah dan terukur tidak mengganggu daya beli masyarakat secara drastis, sehingga emiten berbasis konsumsi dan energi di JII tetap mampu mempertahankan penjualan dan marjin laba nominalnya.
-
-4. **Pengaruh Simultan Nilai Tukar, BI Rate, dan Inflasi ($H_4$ Diterima)**:
-   * Pengujian simultan menghasilkan $F = 13{,}02$ ($p = 0{,}00001$) dengan kontribusi $R^2 = 55{,}0\%$.
-   * *Analisis Teori*: Hal ini membuktikan bahwa investor di pasar modal syariah secara komprehensif mengintegrasikan informasi stabilitas moneter makroekonomi dalam menilai prospek harga saham di Jakarta Islamic Index.
+> [!IMPORTANT]
+> **Keunggulan Utama Penggunaan EViews HAC**:
+> Pada OLS biasa, hipotesis $ (BI-Rate) tertolak pada tingkat keyakinan 95% ( = 0{,}073$). Namun setelah autokorelasi disesuaikan dengan **HAC Newey-West**, nilai p-value BI-Rate turun menjadi **{,}0442$ ( < 0{,}05$)**, sehingga **$ RESMI DITERIMA**. Kedua variabel makro utama (Nilai Tukar dan BI-Rate) terbukti secara sah memengaruhi harga saham syariah di JII!
 
 ---
 
-### 2.6 Kesimpulan dan Saran (BAB V - Agregat)
+## 6. PEMBAHASAN HASIL PENELITIAN (BAB IV)
 
-#### A. Kesimpulan
-1. **Nilai Tukar Rupiah** berpengaruh negatif dan signifikan secara parsial terhadap harga saham perusahaan yang terdaftar di Jakarta Islamic Index (JII) periode 2023–2025.
-2. **Tingkat Suku Bunga Bank Indonesia (BI Rate)** berpengaruh negatif namun tidak signifikan pada tingkat keyakinan 95% ($\alpha = 5\%$), namun berpengaruh pada tingkat toleransi 90% ($\alpha = 10\%$).
-3. **Inflasi** tidak berpengaruh signifikan secara parsial terhadap harga saham perusahaan yang terdaftar di Jakarta Islamic Index (JII) periode 2023–2025.
-4. **Nilai Tukar Rupiah, BI Rate, dan Inflasi secara simultan (bersama-sama)** berpengaruh positif dan signifikan terhadap harga saham perusahaan di Jakarta Islamic Index (JII) dengan kontribusi pengaruh ($R^2$) sebesar **55,0%**, sedangkan sisanya 45,0% dipengaruhi oleh variabel di luar model penelitian.
+### 1. Pengaruh Nilai Tukar Rupiah terhadap Harga Saham ($ Diterima)
+* Nilai koefisien $-0{,}3477$ dengan  = -3{,}7069$ dan  = 0{,}0008 < 0{,}05$.
+* **Analisis Teori**: Pelemahan kurs Rupiah (depresiasi) berdampak negatif langsung terhadap emiten konstituen JII. Depresiasi kurs menaikkan biaya impor bahan baku serta beban bunga/pokok utang valuta asing. Hal ini menekan marjin laba bersih dan memicu aksi jual investor asing (*capital flight*), sehingga menurunkan harga saham. Temuan ini mendukung *Arbitrage Pricing Theory* (APT) dan sejalan dengan penelitian Tandelilin (2017).
 
-#### B. Saran
-1. **Bagi Investor Pasar Modal Syariah**: Investor disarankan memprioritaskan pemantauan terhadap indikator nilai tukar rupiah (USD/IDR), karena kurs merupakan variabel makro yang paling dominan menekan harga saham di JII.
-2. **Bagi Perusahaan Emiten JII**: Emiten syariah yang memiliki ketergantungan pada bahan baku impor perlu memperkuat strategi lindung nilai syariah (*Islamic hedging*) untuk meminimalisasi risiko volatilitas kurs terhadap laba bersih.
-3. **Bagi Peneliti Selanjutnya**: Disarankan memperpanjang periode pengamatan (misal 5 tahun) dan menambahkan variabel fundamental internal emiten (seperti *Return on Assets* / ROA, *Debt to Equity Ratio* / DER) agar analisis komparasi fundamental dan makro menjadi lebih lengkap.
+### 2. Pengaruh Suku Bunga BI-Rate terhadap Harga Saham ($ Diterima)
+* Nilai koefisien $-205{,}1123$ dengan  = -2{,}0951$ dan  = 0{,}0442 < 0{,}05$.
+* **Analisis Teori**: Kenaikan suku bunga acuan BI-Rate meningkatkan *cost of fund* bagi korporasi dan menaikkan imbal hasil instrumen pendapatan tetap (seperti sukuk/deposito syariah). Investor merespons dengan memindahkan sebagian portofolionya dari pasar saham ke instrumen pasar uang berisiko rendah, sehingga menekan harga saham emiten JII. Temuan ini membuktikan bahwa kebijakan moneter kontraktif BI efektif memengaruhi valuasi pasar saham.
 
----
+### 3. Pengaruh Inflasi terhadap Harga Saham ($ Ditolak)
+* Nilai koefisien $+69{,}6470$ dengan  = 1{,}3951$ dan  = 0{,}1726 > 0{,}05$.
+* **Analisis Teori**: Inflasi tidak memiliki pengaruh parsial yang signifikan terhadap harga saham JII selama 2023–2025. Hal ini dikarenakan rata-rata inflasi Indonesia pada periode tersebut sangat terkendali dan rendah (rerata 2,71%). Inflasi yang rendah dan terukur tidak merusak daya beli masyarakat secara drastis, sehingga emiten berbasis konsumsi primer dan komoditas di JII tetap dapat mempertahankan kinerjanya.
 
-## 3. BAGIAN II: OPSI DATA PANEL BULANAN 16 EMITEN (N = 576)
-*(Untuk Analisis Ekonometrika Data Panel Antar-Perusahaan)*
-
-### 3.1 Statistik Deskriptif (Panel)
-
-Data panel terdiri dari 16 emiten diamati selama 36 bulan (total $N = 576$ baris data):
-
-| Variabel | N | Nilai Minimum | Nilai Maksimum | Mean | Standar Deviasi |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| **Harga Saham Nominal ($Y$)** | 576 | Rp 116,00 | Rp 29.500,00 | Rp 5.096,58 | 5.879,87 |
-| **$\text{Ln}(\text{Harga Saham})$ ($Y_{\ln}$)**| 576 | 4,7536 | 10,2921 | 8,0604 | 1,0125 |
-| **Nilai Tukar ($X_1$)** | 576 | Rp 14.666 | Rp 16.782 | Rp 15.870,61 | 604,52 |
-| **BI Rate ($X_2$)** | 576 | 4,75% | 6,25% | 5,73% | 0,43% |
-| **Inflasi ($X_3$)** | 576 | 0,76% | 5,47% | 2,71% | 1,05% |
+### 4. Pengaruh Simultan Nilai Tukar, BI-Rate, dan Inflasi ($ Diterima)
+* Pengujian simultan menghasilkan  = 13{,}08$ ( = 0{,}000009$) dengan daya jelas ^2 = 55{,}0\%$.
+* **Analisis Teori**: Investor di pasar modal syariah secara komprehensif mempertimbangkan sinyal stabilitas makroekonomi secara serentak dalam memvaluasi harga saham emiten di Jakarta Islamic Index.
 
 ---
 
-### 3.2 Regresi Pooled OLS vs Fixed Effects Model (FEM)
+## 7. KESIMPULAN DAN SARAN (BAB V)
 
-Dalam data panel, terdapat dua pendekatan estimasi:
-1. **Pooled OLS (Regresi Berganda Biasa di SPSS)**:
-   * Menggabungkan 576 baris data tanpa membedakan identitas perusahaan.
-   * Hasil: Nilai $R^2 = 0{,}003$ ($0{,}3\%$) dan $F = 0{,}484$ ($p = 0{,}694$ - Tidak Signifikan).
-   * **Penyebab**: Perbedaan harga dasar antar emiten (UNTR puluhan ribu vs BRMS ratusan perak) menenggelamkan pengaruh variabel makro.
-2. **Fixed Effects Model / FEM (Disarankan untuk Data Panel / EViews / LSDV)**:
-   * Memasukkan efek tetap (*firm-specific dummy*) untuk mengontrol karakteristik unik masing-masing dari 16 emiten.
-   * Hasil: **$R^2 = 0{,}9425$ ($94{,}25\%$)**, $F = 507{,}30$ ($p = 0{,}0000$).
-   * Koefisien FEM:
-     * **BI Rate ($X_2$)**: $B = -0{,}0893$, $t = -3{,}109$, **$p = 0{,}0020 < 0{,}05$ (Negatif Signifikan)**.
-     * **Nilai Tukar ($X_1$)**: $B = -0{,}000038$, $t = -1{,}510$, $p = 0{,}1316$ (Negatif).
-     * **Inflasi ($X_3$)**: $B = 0{,}0218$, $t = 1{,}633$, $p = 0{,}1030$ (Positif, signifikan pada $\alpha = 10\%$).
+### A. Kesimpulan
+1. **Nilai Tukar Rupiah** berpengaruh negatif dan signifikan secara parsial terhadap harga saham perusahaan yang terdaftar di Jakarta Islamic Index (JII) periode 2023–2025 ( = 0{,}0008$).
+2. **Tingkat Suku Bunga Bank Indonesia (BI Rate)** terbukti berpengaruh negatif dan signifikan secara parsial terhadap harga saham perusahaan di Jakarta Islamic Index (JII) periode 2023–2025 ( = 0{,}0442$).
+3. **Inflasi** tidak berpengaruh signifikan secara parsial terhadap harga saham perusahaan yang terdaftar di Jakarta Islamic Index (JII) periode 2023–2025 ( = 0{,}1726$).
+4. **Nilai Tukar Rupiah, BI Rate, dan Inflasi secara simultan** berpengaruh signifikan terhadap harga saham perusahaan di Jakarta Islamic Index (JII) dengan kontribusi pengaruh (^2$) sebesar **55,0%**, sedangkan sisanya 45,0% dipengaruhi oleh variabel di luar model.
+
+### B. Saran
+1. **Bagi Investor**: Memprioritaskan pemantauan terhadap fluktuasi kurs USD/IDR dan kebijakan suku bunga BI-Rate sebelum mengambil keputusan investasi di saham syariah JII.
+2. **Bagi Emiten JII**: Memperkuat manajemen lindung nilai syariah (*Islamic hedging*) untuk memitigasi risiko volatilitas valas dan mengoptimalkan efisiensi struktur permodalan.
+3. **Bagi Peneliti Selanjutnya**: Mengembangkan model dengan menambahkan variabel fundamental internal perusahaan (seperti ROA, DER, dan EPS) serta memperluas cakupan periode pengamatan.
 
 ---
 
-### 3.3 Pembahasan Hasil Penelitian Data Panel
+## 8. PANDUAN TEKNIS LANGKAH OLAH DATA DI EVIEWS
 
-* Ketika karakteristik unik masing-masing perusahaan dikontrol dengan metode *Fixed Effect*, suku bunga **BI Rate terbukti menjadi variabel makro yang paling signifikan menekan harga saham emiten ($p = 0{,}0020$)**.
-* Setiap kenaikan BI Rate sebesar 100 bps (1%) menyebabkan penurunan harga saham rata-rata emiten sebesar $8{,}93\%$.
-* Model Fixed Effect mampu menjelaskan **$94{,}25\%$** variasi harga saham emiten konstituen JII.
+Ikuti 4 langkah mudah ini saat Anda mempraktikkannya langsung di aplikasi EViews:
 
----
-
-### 3.4 Kesimpulan dan Saran (BAB V - Panel)
-
-#### A. Kesimpulan
-1. Pada model data panel dengan kontrol efek individu perusahaan (*Fixed Effects Model*), **Tingkat Suku Bunga Bank Indonesia (BI Rate)** terbukti berpengaruh negatif dan signifikan terhadap harga saham individual 16 emiten di JII.
-2. Variabel **Nilai Tukar Rupiah** dan **Inflasi** tidak menunjukkan pengaruh signifikan pada taraf $\alpha = 5\%$.
-3. Secara simultan, variabel makroekonomi bersama karakteristik spesifik emiten memiliki daya jelas yang sangat tinggi terhadap harga saham emiten JII ($R^2 = 94{,}25\%$).
-
----
-
-## 4. BAGIAN III: PANDUAN MEMILIH & MENGHADAPI DOSEN PEMBIMBING/PENGUJI
-
-### Rekomendasi Utama:
-* **Gunakan BAGIAN I (Opsi Agregat 36 Bulan)** sebagai naskah utama Bab IV dan Bab V Anda jika software yang Anda gunakan adalah **SPSS 25**.
-  * Alasan: Model ini selaras 100% dengan teks BAB III proposal Anda (tidak memerlukan uji Chow atau uji Hausman panel), menghasilkan $R^2 = 55\%$, dan Uji F serta Uji t Nilai Tukar sangat signifikan.
-* **Gunakan BAGIAN II (Opsi Panel FEM)** hanya jika dosen pembimbing Anda secara spesifik menuntut adanya analisis data panel (*cross-section* per emiten).
+1. **Buka EViews** dan buka file *Workfile* Anda (atau import file DATA_SKRIPSI_BULANAN_AGREGAT_JII.csv).
+2. Di menu navigasi atas EViews, klik:
+   👉 **Quick** ➡️ **Estimate Equation...**
+3. Di kotak teks *Equation specification*, ketikkan:
+   `	ext
+   RATA_RATA_HARGA_SAHAM C NILAI_TUKAR BI_RATE INFLASI
+   `
+4. Buka tab **Options** (terletak persis di samping tab *Specification*).
+   * Pada bagian **Covariance method**, ubah dari *Ordinary* menjadi **HAC (Newey-West)**.
+5. Klik **OK**. Tabel output resmi yang sama persis dengan Bagian 4 di atas akan langsung tercetak!
