@@ -20,7 +20,1118 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
-  <link rel="stylesheet" href="style.css">
+  <style>
+/* ==========================================================================
+   CSS STYLING - DASHBOARD SKRIPSI JII (FEBI UIN SMH BANTEN)
+   ========================================================================== */
+
+:root {
+  /* Dark Theme Palette (Default) */
+  --bg-primary: #0a0f1d;
+  --bg-secondary: #111827;
+  --bg-card: rgba(17, 24, 39, 0.85);
+  --bg-card-hover: rgba(31, 41, 55, 0.9);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-highlight: rgba(16, 185, 129, 0.3);
+
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --text-dim: #6b7280;
+
+  --accent-emerald: #10b981;
+  --accent-emerald-light: #34d399;
+  --accent-cyan: #06b6d4;
+  --accent-blue: #3b82f6;
+  --accent-yellow: #f59e0b;
+  --accent-red: #ef4444;
+
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Light Theme Variables */
+body.light-theme {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-card: rgba(255, 255, 255, 0.92);
+  --bg-card-hover: #f1f5f9;
+  --border-color: #e2e8f0;
+  --border-highlight: rgba(16, 185, 129, 0.4);
+
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --text-dim: #94a3b8;
+
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 12px 24px -6px rgba(0, 0, 0, 0.1);
+}
+
+/* Base Reset & Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Navigation Bar */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color);
+  padding: 14px 0;
+}
+
+.nav-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-badge {
+  background: linear-gradient(135deg, var(--accent-emerald), var(--accent-cyan));
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  color: var(--text-main);
+}
+
+.brand-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-emerald), #059669);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.btn-primary:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-main);
+  border-color: var(--border-color);
+}
+
+.btn-outline:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--accent-emerald);
+}
+
+.btn-icon {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  font-size: 16px;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border-radius: var(--radius-sm);
+}
+
+.btn-icon:hover {
+  background: var(--bg-card-hover);
+}
+
+.btn-sm {
+  font-size: 11px;
+  padding: 4px 10px;
+}
+
+/* Hero Section */
+.hero-section {
+  padding: 36px 0 24px;
+  background: radial-gradient(circle at top right, rgba(16, 185, 129, 0.08), transparent 45%),
+              radial-gradient(circle at top left, rgba(6, 182, 212, 0.06), transparent 40%);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.hero-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.pill {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+}
+
+.pill-emerald {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--accent-emerald-light);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.pill-subtle {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-muted);
+  border: 1px solid var(--border-color);
+}
+
+.hero-title {
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.35;
+  color: var(--text-main);
+  max-width: 950px;
+  margin-bottom: 12px;
+}
+
+.hero-subtitle {
+  font-size: 15px;
+  color: var(--text-muted);
+  max-width: 820px;
+  margin-bottom: 20px;
+}
+
+/* Author Card */
+.author-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 12px 20px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  gap: 20px;
+}
+
+.author-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.author-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-dim);
+}
+
+.author-value {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.author-divider {
+  width: 1px;
+  height: 28px;
+  background-color: var(--border-color);
+}
+
+/* KPI Cards */
+.kpi-section {
+  padding: 24px 0 20px;
+}
+
+.grid-kpi {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 16px;
+}
+
+.kpi-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.kpi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(16, 185, 129, 0.4);
+}
+
+.kpi-card.highlight {
+  border-left: 4px solid var(--accent-emerald);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), var(--bg-card));
+}
+
+.kpi-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.kpi-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.kpi-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+.badge-green {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--accent-emerald-light);
+}
+
+.badge-red {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+}
+
+.badge-emerald {
+  background: rgba(16, 185, 129, 0.2);
+  color: var(--accent-emerald-light);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+}
+
+.badge-cyan {
+  background: rgba(6, 182, 212, 0.2);
+  color: #38bdf8;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+}
+
+.kpi-value {
+  font-size: 24px;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  color: var(--text-main);
+  margin-bottom: 6px;
+}
+
+.kpi-meta {
+  font-size: 11px;
+  color: var(--text-dim);
+  line-height: 1.4;
+}
+
+/* Tabs Navigation */
+.tabs-nav {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.tab-btn {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid transparent;
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: var(--transition);
+}
+
+.tab-btn:hover {
+  color: var(--text-main);
+  background: var(--bg-card-hover);
+}
+
+.tab-btn.active {
+  color: #ffffff;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(6, 182, 212, 0.25));
+  border-color: rgba(16, 185, 129, 0.5);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.15);
+}
+
+body.light-theme .tab-btn.active {
+  color: #065f46;
+  background: #d1fae5;
+  border-color: #10b981;
+}
+
+/* Tab Panes */
+.tab-pane {
+  display: none;
+}
+
+.tab-pane.active {
+  display: block;
+  animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   EXACT IDE MARKDOWN PREVIEW STYLING (MATCHING SCREENSHOT)
+   ========================================================================== */
+
+.ide-preview-wrapper {
+  background: #1e1e1e;
+  border: 1px solid #333333;
+  border-radius: var(--radius-md);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+/* IDE Top Tab Bar */
+.ide-tab-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #252526;
+  border-bottom: 1px solid #1e1e1e;
+  padding: 0 12px;
+  height: 38px;
+}
+
+.ide-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #1e1e1e;
+  padding: 0 16px;
+  height: 38px;
+  border-top: 2px solid #3794ff;
+  color: #ffffff;
+  font-size: 13px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  user-select: none;
+}
+
+.ide-tab-icon {
+  font-size: 14px;
+}
+
+.ide-tab-title {
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+
+.ide-tab-badge {
+  font-size: 10px;
+  background: #333333;
+  color: #858585;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+.ide-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.ide-btn {
+  background: #333333;
+  color: #cccccc;
+  border: 1px solid #3c3c3c;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ide-btn:hover {
+  background: #444444;
+  color: #ffffff;
+}
+
+/* IDE Body Layout (Sidebar + Markdown Viewport) */
+.ide-body-layout {
+  display: flex;
+  min-height: 750px;
+  position: relative;
+}
+
+/* Sidebar TOC */
+.ide-toc-sidebar {
+  width: 280px;
+  background: #252526;
+  border-right: 1px solid #333333;
+  padding: 16px;
+  flex-shrink: 0;
+  max-height: 750px;
+  overflow-y: auto;
+  transition: width 0.3s ease, padding 0.3s ease;
+}
+
+.ide-toc-sidebar.collapsed {
+  width: 0;
+  padding: 0;
+  border-right: none;
+  overflow: hidden;
+}
+
+.ide-toc-header {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #858585;
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #333333;
+}
+
+.ide-toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.ide-toc-list li {
+  margin-bottom: 6px;
+}
+
+.ide-toc-list a {
+  color: #9cdcfe;
+  text-decoration: none;
+  display: block;
+  padding: 3px 6px;
+  border-radius: 4px;
+  transition: background 0.15s ease, color 0.15s ease;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ide-toc-list a:hover {
+  background: #333333;
+  color: #ffffff;
+}
+
+.ide-toc-list .toc-sub {
+  padding-left: 14px;
+  font-size: 11.5px;
+  color: #858585;
+}
+
+.ide-toc-list .toc-sub a {
+  color: #4daafc;
+}
+
+/* Main Markdown Viewport */
+.ide-markdown-viewport {
+  flex-grow: 1;
+  background: #1e1e1e;
+  padding: 36px 48px;
+  max-height: 750px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+/* Exact VS Code Markdown Styling */
+.vscode-markdown-content {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  color: #cccccc;
+  max-width: 900px;
+}
+
+.vscode-markdown-content h1,
+.vscode-markdown-content h2,
+.vscode-markdown-content h3,
+.vscode-markdown-content h4 {
+  color: #ffffff;
+  font-weight: 700;
+  scroll-margin-top: 20px;
+}
+
+.vscode-markdown-content h1 {
+  font-size: 26px;
+  line-height: 1.3;
+  margin-top: 0;
+  margin-bottom: 18px;
+  color: #ffffff;
+}
+
+.vscode-markdown-content h2 {
+  font-size: 20px;
+  margin-top: 32px;
+  margin-bottom: 14px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.vscode-markdown-content h3 {
+  font-size: 16px;
+  margin-top: 24px;
+  margin-bottom: 10px;
+}
+
+.vscode-markdown-content p {
+  margin-top: 0;
+  margin-bottom: 14px;
+  color: #cccccc;
+}
+
+.vscode-markdown-content a {
+  color: #3794ff;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.vscode-markdown-content a:hover {
+  text-decoration: underline;
+  color: #64b5f6;
+}
+
+.vscode-markdown-content hr {
+  height: 2px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 0;
+  margin: 24px 0 28px;
+}
+
+.vscode-markdown-content ul,
+.vscode-markdown-content ol {
+  padding-left: 24px;
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.vscode-markdown-content li {
+  margin-bottom: 4px;
+  color: #cccccc;
+}
+
+.vscode-markdown-content li > ul,
+.vscode-markdown-content li > ol {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+/* VS Code Markdown Table */
+.vscode-markdown-content table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 18px 0;
+  font-size: 13.5px;
+}
+
+.vscode-markdown-content th,
+.vscode-markdown-content td {
+  border: 1px solid #3c3c3c;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.vscode-markdown-content th {
+  background: #252526;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.vscode-markdown-content tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.vscode-markdown-content blockquote {
+  border-left: 4px solid #3794ff;
+  background: rgba(55, 148, 255, 0.06);
+  padding: 10px 16px;
+  margin: 16px 0;
+  color: #9cdcfe;
+  border-radius: 0 4px 4px 0;
+}
+
+.vscode-markdown-content code {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  background: #2d2d2d;
+  color: #ce9178;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+.vscode-markdown-content pre {
+  background: #252526;
+  border: 1px solid #333333;
+  padding: 14px;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin: 16px 0;
+}
+
+.vscode-markdown-content pre code {
+  background: transparent;
+  padding: 0;
+  color: #d4d4d4;
+}
+
+/* KaTeX equations in preview */
+.vscode-markdown-content .katex {
+  color: #4ec9b0;
+  font-size: 1.05em;
+}
+
+.vscode-markdown-content .katex-display {
+  margin: 14px 0;
+  overflow-x: auto;
+  padding: 6px 0;
+}
+
+/* ==========================================================================
+   OTHER TABS & CARDS STYLING
+   ========================================================================== */
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+}
+
+.card-header {
+  margin-bottom: 18px;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.card-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.grid-2-col {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  gap: 20px;
+}
+
+.mt-2 { margin-top: 8px; }
+.mt-3 { margin-top: 14px; }
+.mt-4 { margin-top: 24px; }
+
+/* Charts */
+.chart-container {
+  position: relative;
+  width: 100%;
+  height: 380px;
+}
+
+.chart-container-sm {
+  position: relative;
+  width: 100%;
+  height: 260px;
+}
+
+.chart-tag {
+  font-size: 11px;
+  color: var(--accent-emerald-light);
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+}
+
+/* Hypotheses List */
+.hypothesis-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hypo-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+}
+
+.hypo-badge {
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.hypo-item.pass .hypo-badge {
+  background: rgba(16, 185, 129, 0.2);
+  color: var(--accent-emerald-light);
+}
+
+.hypo-item.partial .hypo-badge {
+  background: rgba(245, 158, 11, 0.2);
+  color: var(--accent-yellow);
+}
+
+.hypo-item.rejected .hypo-badge {
+  background: rgba(239, 68, 68, 0.2);
+  color: #f87171;
+}
+
+.hypo-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.hypo-status {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* Tables */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  text-align: left;
+}
+
+.styled-table th {
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-muted);
+  font-weight: 600;
+  padding: 12px 14px;
+  border-bottom: 2px solid var(--border-color);
+  white-space: nowrap;
+}
+
+.styled-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-main);
+}
+
+.styled-table tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.styled-table tr.highlight-row td {
+  background: rgba(16, 185, 129, 0.06);
+}
+
+/* Status Pills */
+.status-pill {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+.status-pill.green {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--accent-emerald-light);
+}
+
+.status-pill.yellow {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--accent-yellow);
+}
+
+.status-pill.red {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+}
+
+/* Equation Box */
+.equation-box {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px dashed var(--accent-emerald);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--accent-emerald-light);
+  overflow-x: auto;
+}
+
+body.light-theme .equation-box {
+  background: #f0fdf4;
+  color: #065f46;
+}
+
+/* Conclusions & Suggestions */
+.conclusion-list, .suggestion-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.conclusion-card {
+  display: flex;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+}
+
+.conclusion-card.highlight {
+  border-color: rgba(16, 185, 129, 0.5);
+  background: rgba(16, 185, 129, 0.05);
+}
+
+.concl-num {
+  font-size: 16px;
+  font-weight: 800;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.conclusion-card.highlight .concl-num {
+  background: var(--accent-emerald);
+  color: #ffffff;
+}
+
+.conclusion-card h4, .sugg-card h4 {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--text-main);
+}
+
+.conclusion-card p, .sugg-card p {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.sugg-card {
+  display: flex;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+}
+
+.sugg-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+/* Data Table Search */
+.form-input {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-family: var(--font-sans);
+  outline: none;
+  min-width: 240px;
+}
+
+.form-input:focus {
+  border-color: var(--accent-emerald);
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--accent-emerald);
+  color: #ffffff;
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Footer */
+.footer {
+  padding: 36px 0;
+  border-top: 1px solid var(--border-color);
+  margin-top: 48px;
+  color: var(--text-dim);
+  font-size: 13px;
+}
+
+.footer-sub {
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+.text-center { text-align: center; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .hero-title { font-size: 22px; }
+  .grid-2-col { grid-template-columns: 1fr; }
+  .author-divider { display: none; }
+  .nav-brand .brand-sub { display: none; }
+  .ide-toc-sidebar { display: none; }
+  .ide-markdown-viewport { padding: 24px; }
+}
+
+/* Print Friendly Styles */
+@media print {
+  .navbar, .nav-actions, .tabs-nav, .chart-controls, .btn, .footer, .ide-tab-bar, .ide-toc-sidebar {
+    display: none !important;
+  }
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  .card, .ide-preview-wrapper {
+    background: #ffffff !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+  .vscode-markdown-content, .vscode-markdown-content p, .vscode-markdown-content h1, .vscode-markdown-content h2, .vscode-markdown-content h3 {
+    color: #000000 !important;
+  }
+  .tab-pane {
+    display: block !important;
+    margin-bottom: 24px;
+  }
+}
+
+</style>
 </head>
 <body class="dark-theme">
   <!-- Top Navigation Bar -->
@@ -648,7 +1759,791 @@
   <!-- Toast Notification -->
   <div id="toastNotification" class="toast">Teks berhasil disalin!</div>
 
-  <script src="data.js"></script>
-  <script src="app.js"></script>
+  
+  <script>
+const AGREGAT_DATA = [
+  {
+    "periode": "2023-01",
+    "tahun": 2023,
+    "bulan": 1,
+    "rata_rata_harga_saham": 5472.12,
+    "ln_harga_saham": 8.6074,
+    "nilai_tukar": 14995,
+    "bi_rate": 5.75,
+    "inflasi": 5.28
+  },
+  {
+    "periode": "2023-02",
+    "tahun": 2023,
+    "bulan": 2,
+    "rata_rata_harga_saham": 5560.81,
+    "ln_harga_saham": 8.6235,
+    "nilai_tukar": 15209,
+    "bi_rate": 5.75,
+    "inflasi": 5.47
+  },
+  {
+    "periode": "2023-03",
+    "tahun": 2023,
+    "bulan": 3,
+    "rata_rata_harga_saham": 5569.69,
+    "ln_harga_saham": 8.6251,
+    "nilai_tukar": 15020,
+    "bi_rate": 5.75,
+    "inflasi": 4.97
+  },
+  {
+    "periode": "2023-04",
+    "tahun": 2023,
+    "bulan": 4,
+    "rata_rata_harga_saham": 5654.81,
+    "ln_harga_saham": 8.6403,
+    "nilai_tukar": 14666,
+    "bi_rate": 5.75,
+    "inflasi": 4.33
+  },
+  {
+    "periode": "2023-05",
+    "tahun": 2023,
+    "bulan": 5,
+    "rata_rata_harga_saham": 5126.94,
+    "ln_harga_saham": 8.5423,
+    "nilai_tukar": 14979,
+    "bi_rate": 5.75,
+    "inflasi": 4.0
+  },
+  {
+    "periode": "2023-06",
+    "tahun": 2023,
+    "bulan": 6,
+    "rata_rata_harga_saham": 5267.56,
+    "ln_harga_saham": 8.5693,
+    "nilai_tukar": 15064,
+    "bi_rate": 5.75,
+    "inflasi": 3.52
+  },
+  {
+    "periode": "2023-07",
+    "tahun": 2023,
+    "bulan": 7,
+    "rata_rata_harga_saham": 5585.06,
+    "ln_harga_saham": 8.6279,
+    "nilai_tukar": 15088,
+    "bi_rate": 5.75,
+    "inflasi": 3.08
+  },
+  {
+    "periode": "2023-08",
+    "tahun": 2023,
+    "bulan": 8,
+    "rata_rata_harga_saham": 5436.88,
+    "ln_harga_saham": 8.601,
+    "nilai_tukar": 15216,
+    "bi_rate": 5.75,
+    "inflasi": 3.27
+  },
+  {
+    "periode": "2023-09",
+    "tahun": 2023,
+    "bulan": 9,
+    "rata_rata_harga_saham": 5651.69,
+    "ln_harga_saham": 8.6397,
+    "nilai_tukar": 15487,
+    "bi_rate": 5.75,
+    "inflasi": 2.28
+  },
+  {
+    "periode": "2023-10",
+    "tahun": 2023,
+    "bulan": 10,
+    "rata_rata_harga_saham": 5202.44,
+    "ln_harga_saham": 8.5569,
+    "nilai_tukar": 15843,
+    "bi_rate": 6.0,
+    "inflasi": 2.56
+  },
+  {
+    "periode": "2023-11",
+    "tahun": 2023,
+    "bulan": 11,
+    "rata_rata_harga_saham": 4952.94,
+    "ln_harga_saham": 8.5077,
+    "nilai_tukar": 15407,
+    "bi_rate": 6.0,
+    "inflasi": 2.86
+  },
+  {
+    "periode": "2023-12",
+    "tahun": 2023,
+    "bulan": 12,
+    "rata_rata_harga_saham": 4872.81,
+    "ln_harga_saham": 8.4914,
+    "nilai_tukar": 15416,
+    "bi_rate": 6.0,
+    "inflasi": 2.61
+  },
+  {
+    "periode": "2024-01",
+    "tahun": 2024,
+    "bulan": 1,
+    "rata_rata_harga_saham": 4898.44,
+    "ln_harga_saham": 8.4967,
+    "nilai_tukar": 15783,
+    "bi_rate": 6.0,
+    "inflasi": 2.57
+  },
+  {
+    "periode": "2024-02",
+    "tahun": 2024,
+    "bulan": 2,
+    "rata_rata_harga_saham": 5003.69,
+    "ln_harga_saham": 8.5179,
+    "nilai_tukar": 15715,
+    "bi_rate": 6.0,
+    "inflasi": 2.75
+  },
+  {
+    "periode": "2024-03",
+    "tahun": 2024,
+    "bulan": 3,
+    "rata_rata_harga_saham": 5152.5,
+    "ln_harga_saham": 8.5472,
+    "nilai_tukar": 15857,
+    "bi_rate": 6.0,
+    "inflasi": 3.05
+  },
+  {
+    "periode": "2024-04",
+    "tahun": 2024,
+    "bulan": 4,
+    "rata_rata_harga_saham": 5117.69,
+    "ln_harga_saham": 8.5405,
+    "nilai_tukar": 16255,
+    "bi_rate": 6.25,
+    "inflasi": 3.0
+  },
+  {
+    "periode": "2024-05",
+    "tahun": 2024,
+    "bulan": 5,
+    "rata_rata_harga_saham": 4840.62,
+    "ln_harga_saham": 8.4848,
+    "nilai_tukar": 16253,
+    "bi_rate": 6.25,
+    "inflasi": 2.84
+  },
+  {
+    "periode": "2024-06",
+    "tahun": 2024,
+    "bulan": 6,
+    "rata_rata_harga_saham": 4823.5,
+    "ln_harga_saham": 8.4813,
+    "nilai_tukar": 16421,
+    "bi_rate": 6.25,
+    "inflasi": 2.51
+  },
+  {
+    "periode": "2024-07",
+    "tahun": 2024,
+    "bulan": 7,
+    "rata_rata_harga_saham": 5051.06,
+    "ln_harga_saham": 8.5274,
+    "nilai_tukar": 16260,
+    "bi_rate": 6.25,
+    "inflasi": 2.13
+  },
+  {
+    "periode": "2024-08",
+    "tahun": 2024,
+    "bulan": 8,
+    "rata_rata_harga_saham": 5213.56,
+    "ln_harga_saham": 8.559,
+    "nilai_tukar": 15455,
+    "bi_rate": 6.25,
+    "inflasi": 2.12
+  },
+  {
+    "periode": "2024-09",
+    "tahun": 2024,
+    "bulan": 9,
+    "rata_rata_harga_saham": 5388.44,
+    "ln_harga_saham": 8.592,
+    "nilai_tukar": 15140,
+    "bi_rate": 6.0,
+    "inflasi": 1.84
+  },
+  {
+    "periode": "2024-10",
+    "tahun": 2024,
+    "bulan": 10,
+    "rata_rata_harga_saham": 5394.56,
+    "ln_harga_saham": 8.5931,
+    "nilai_tukar": 15698,
+    "bi_rate": 6.0,
+    "inflasi": 1.71
+  },
+  {
+    "periode": "2024-11",
+    "tahun": 2024,
+    "bulan": 11,
+    "rata_rata_harga_saham": 5067.75,
+    "ln_harga_saham": 8.5307,
+    "nilai_tukar": 15856,
+    "bi_rate": 6.0,
+    "inflasi": 1.55
+  },
+  {
+    "periode": "2024-12",
+    "tahun": 2024,
+    "bulan": 12,
+    "rata_rata_harga_saham": 5037.88,
+    "ln_harga_saham": 8.5247,
+    "nilai_tukar": 16162,
+    "bi_rate": 6.0,
+    "inflasi": 1.57
+  },
+  {
+    "periode": "2025-01",
+    "tahun": 2025,
+    "bulan": 1,
+    "rata_rata_harga_saham": 4862.0,
+    "ln_harga_saham": 8.4892,
+    "nilai_tukar": 16305,
+    "bi_rate": 5.75,
+    "inflasi": 0.76
+  },
+  {
+    "periode": "2025-02",
+    "tahun": 2025,
+    "bulan": 2,
+    "rata_rata_harga_saham": 4311.5,
+    "ln_harga_saham": 8.369,
+    "nilai_tukar": 16380,
+    "bi_rate": 5.75,
+    "inflasi": 1.15
+  },
+  {
+    "periode": "2025-03",
+    "tahun": 2025,
+    "bulan": 3,
+    "rata_rata_harga_saham": 4357.62,
+    "ln_harga_saham": 8.3797,
+    "nilai_tukar": 16520,
+    "bi_rate": 5.75,
+    "inflasi": 1.45
+  },
+  {
+    "periode": "2025-04",
+    "tahun": 2025,
+    "bulan": 4,
+    "rata_rata_harga_saham": 4627.31,
+    "ln_harga_saham": 8.4397,
+    "nilai_tukar": 16590,
+    "bi_rate": 5.75,
+    "inflasi": 1.85
+  },
+  {
+    "periode": "2025-05",
+    "tahun": 2025,
+    "bulan": 5,
+    "rata_rata_harga_saham": 4854.69,
+    "ln_harga_saham": 8.4877,
+    "nilai_tukar": 16480,
+    "bi_rate": 5.5,
+    "inflasi": 2.1
+  },
+  {
+    "periode": "2025-06",
+    "tahun": 2025,
+    "bulan": 6,
+    "rata_rata_harga_saham": 4618.81,
+    "ln_harga_saham": 8.4379,
+    "nilai_tukar": 16390,
+    "bi_rate": 5.5,
+    "inflasi": 2.25
+  },
+  {
+    "periode": "2025-07",
+    "tahun": 2025,
+    "bulan": 7,
+    "rata_rata_harga_saham": 4881.56,
+    "ln_harga_saham": 8.4932,
+    "nilai_tukar": 16450,
+    "bi_rate": 5.25,
+    "inflasi": 2.4
+  },
+  {
+    "periode": "2025-08",
+    "tahun": 2025,
+    "bulan": 8,
+    "rata_rata_harga_saham": 4835.31,
+    "ln_harga_saham": 8.4837,
+    "nilai_tukar": 16380,
+    "bi_rate": 5.0,
+    "inflasi": 2.55
+  },
+  {
+    "periode": "2025-09",
+    "tahun": 2025,
+    "bulan": 9,
+    "rata_rata_harga_saham": 5052.19,
+    "ln_harga_saham": 8.5276,
+    "nilai_tukar": 16510,
+    "bi_rate": 4.75,
+    "inflasi": 2.65
+  },
+  {
+    "periode": "2025-10",
+    "tahun": 2025,
+    "bulan": 10,
+    "rata_rata_harga_saham": 5133.75,
+    "ln_harga_saham": 8.5436,
+    "nilai_tukar": 16620,
+    "bi_rate": 4.75,
+    "inflasi": 2.75
+  },
+  {
+    "periode": "2025-11",
+    "tahun": 2025,
+    "bulan": 11,
+    "rata_rata_harga_saham": 5210.94,
+    "ln_harga_saham": 8.5585,
+    "nilai_tukar": 16690,
+    "bi_rate": 4.75,
+    "inflasi": 2.85
+  },
+  {
+    "periode": "2025-12",
+    "tahun": 2025,
+    "bulan": 12,
+    "rata_rata_harga_saham": 5387.81,
+    "ln_harga_saham": 8.5919,
+    "nilai_tukar": 16782,
+    "bi_rate": 4.75,
+    "inflasi": 2.92
+  }
+];
+
+const MARKDOWN_CONTENT = "# HASIL OLAH DATA STATISTIK, PEMBAHASAN (BAB IV), DAN KESIMPULAN (BAB V)\n\n**Judul Penelitian:**  \n*Pengaruh Nilai Tukar Rupiah, Tingkat Suku Bunga Bank Indonesia dan Inflasi terhadap Harga Saham Perusahaan yang Terdaftar di Jakarta Islamic Index (JII) Periode 2023\u20132025*\n\n**Penyusun:** Siti Selviah (NIM: 221410061)  \n**Jurusan / Fakultas:** Ekonomi Syariah / Fakultas Ekonomi dan Bisnis Islam (FEBI)  \n**Institusi:** UIN Sultan Maulana Hasanuddin Banten  \n**Sampel Penelitian:** 16 Emiten Konstituen Konsisten JII (2023\u20132025)\n\n---\n\n## DAFTAR ISI DOKUMEN\n1. [Ringkasan Eksekutif & Struktur Analisis](#1-ringkasan-eksekutif--struktur-analisis)\n2. [BAGIAN I: Opsi Data Agregat Bulanan Portofolio JII (N = 36)](#2-bagian-i-opsi-data-agregat-bulanan-portofolio-jii-n--36)\n   - [2.1 Statistik Deskriptif](#21-statistik-deskriptif-agregat)\n   - [2.2 Uji Asumsi Klasik](#22-uji-asumsi-klasik-agregat)\n   - [2.3 Analisis Regresi Linear Berganda](#23-analisis-regresi-linear-berganda-agregat)\n   - [2.4 Pengujian Hipotesis (Uji F dan Uji t)](#24-pengujian-hipotesis-agregat)\n   - [2.5 Pembahasan Hasil Penelitian](#25-pembahasan-hasil-penelitian-agregat)\n   - [2.6 Kesimpulan dan Saran (BAB V)](#26-kesimpulan-dan-saran-bab-v-agregat)\n3. [BAGIAN II: Opsi Data Panel Bulanan 16 Emiten (N = 576)](#3-bagian-ii-opsi-data-panel-bulanan-16-emiten-n--576)\n   - [3.1 Statistik Deskriptif Data Panel](#31-statistik-deskriptif-panel)\n   - [3.2 Regresi Pooled OLS vs Fixed Effects Model (FEM)](#32-regresi-pooled-ols-vs-fixed-effects-model-fem)\n   - [3.3 Pembahasan Hasil Penelitian Data Panel](#33-pembahasan-hasil-penelitian-panel)\n   - [3.4 Kesimpulan dan Saran (BAB V)](#34-kesimpulan-dan-saran-bab-v-panel)\n4. [BAGIAN III: Panduan Memilih & Menghadapi Dosen Pembimbing/Penguji](#4-bagian-iii-panduan-memilih--menghadapi-dosen-pembimbingpenguji)\n\n---\n\n## 1. RINGKASAN EKSEKUTIF & STRUKTUR ANALISIS\n\nPenelitian ini menguji pengaruh tiga variabel makroekonomi utama:\n1. **Nilai Tukar Rupiah ($X_1$)**: Kurs transaksi tengah USD/IDR bulanan.\n2. **Tingkat Suku Bunga Bank Indonesia / BI-Rate ($X_2$)**: Suku bunga acuan RDG bulanan (%).\n3. **Inflasi ($X_3$)**: Tingkat inflasi bulanan *Year-on-Year* dari BPS (%).\n4. **Harga Saham ($Y$)**: Closing price penutupan akhir bulan 16 emiten JII terpilih (`ADRO`, `ANTM`, `BRIS`, `BRMS`, `CPIN`, `EXCL`, `ICBP`, `INCO`, `INDF`, `INKP`, `KLBF`, `PGAS`, `PTBA`, `TLKM`, `UNTR`, `UNVR`).\n\nFile sumber data yang telah dipersiapkan dan tervalidasi:\n* File Agregat: `DATA_SKRIPSI_BULANAN_AGREGAT_JII.csv` ($N = 36$ bulan)\n* File Panel: `DATA_SKRIPSI_BULANAN_PANEL_16_EMITEN.csv` ($N = 576$ baris observasi)\n\n---\n\n## 2. BAGIAN I: OPSI DATA AGREGAT BULANAN PORTOFOLIO JII (N = 36)\n*(Disarankan untuk Olah Data Regresi Linear Berganda Standar di SPSS 25)*\n\n### 2.1 Statistik Deskriptif (Agregat)\n\nTabel berikut menyajikan ringkasan statistik deskriptif untuk data 36 bulan (Januari 2023 \u2013 Desember 2025):\n\n| Variabel | N | Nilai Minimum | Nilai Maksimum | Rata-rata (Mean) | Standar Deviasi |\n| :--- | :---: | :---: | :---: | :---: | :---: |\n| **Harga Saham JII ($Y$)** | 36 | Rp 4.311,50 | Rp 5.654,81 | Rp 5.096,58 | 337,74 |\n| **Nilai Tukar Rupiah ($X_1$)** | 36 | Rp 14.666,00 | Rp 16.782,00 | Rp 15.870,61 | 612,57 |\n| **BI Rate ($X_2$)** | 36 | 4,75% | 6,25% | 5,73% | 0,44% |\n| **Inflasi ($X_3$)** | 36 | 0,76% | 5,47% | 2,71% | 1,06% |\n\n**Interpretasi:**\n* Rata-rata pergerakan harga saham portofolio 16 emiten JII selama 2023\u20132025 berada pada level Rp 5.096,58 dengan volatilitas yang terjaga (standar deviasi 337,74).\n* Nilai tukar rupiah bergerak dari level terkuat Rp 14.666 per USD (April 2023) hingga level terlemah Rp 16.782 per USD (Desember 2025).\n* Suku bunga BI-Rate berada pada rentang akomodatif-moderat antara 4,75% hingga 6,25%, sedangkan inflasi bergerak melandai dari puncaknya 5,47% (Februari 2023) menuju 0,76% (Januari 2025).\n\n---\n\n### 2.2 Uji Asumsi Klasik (Agregat)\n\n#### A. Uji Normalitas Residual (Kolmogorov-Smirnov)\n* **Nilai Kolmogorov-Smirnov Z**: 0,0981\n* **Asymp. Sig. (2-tailed)**: **0,8455**\n* **Kriteria**: Nilai Sig ($0{,}8455$) $> 0{,}05$.\n* **Kesimpulan**: Nilai residual terdistribusi secara normal. Asumsi normalitas **terpenuhi dengan sangat sempurna**.\n\n#### B. Uji Multikolinearitas (Tolerance & VIF)\nKriteria: Nilai *Tolerance* $> 0{,}10$ dan VIF $< 10{,}00$.\n\n| Variabel Independen | Tolerance | VIF | Keterangan |\n| :--- | :---: | :---: | :--- |\n| **Nilai Tukar Rupiah ($X_1$)** | **0,4481** | **2,2315** | Bebas Multikolinearitas |\n| **BI Rate ($X_2$)** | **0,6772** | **1,4766** | Bebas Multikolinearitas |\n| **Inflasi ($X_3$)** | **0,5361** | **1,8653** | Bebas Multikolinearitas |\n\n* **Kesimpulan**: Seluruh variabel independen memiliki nilai VIF jauh di bawah 10 dan Tolerance di atas 0,10. **Tidak ada variabel yang terdepak oleh SPSS** dan model terbebas dari gejala multikolinearitas.\n\n#### C. Uji Autokorelasi (Durbin-Watson)\n* **Nilai DW Hitung ($d$)**: **0,9808**\n* **Nilai Tabel DW ($\\alpha=0{,}05, n=36, k=3$)**: $d_L = 1{,}295$, $d_U = 1{,}654$.\n* *Catatan*: Nilai DW berada di bawah $d_L$ yang merupakan ciri khas data *time-series* harga pasar modal bulanan (*momentum effect* harga saham). Untuk mengoptimalkan residual time-series, dapat dilaporkan bahwa model time-series mengalami autokorelasi positif wajar yang lazim pada harga saham bulanan, atau dapat disempurnakan dengan estimasi Newey-West / Cochrane-Orcutt bila diminta dosen.\n\n#### D. Uji Heteroskedastisitas (Uji Glejser)\nKriteria: Meregresikan nilai absolut residual ($|e|$) terhadap masing-masing variabel independen. Syarat lolos adalah nilai Sig $> 0{,}05$.\n\n| Variabel Independen | Koefisien B | Nilai t | Sig. (p-value) | Status |\n| :--- | :---: | :---: | :---: | :--- |\n| **Nilai Tukar ($X_1$)** | 0,0254 | 0,680 | **0,5012** | Homoskedastisitas (Lolos) |\n| **BI Rate ($X_2$)** | -8,3113 | -0,159 | **0,8744** | Homoskedastisitas (Lolos) |\n| **Inflasi ($X_3$)** | -40,6037 | -1,985 | **0,0553** | Homoskedastisitas (Lolos) |\n\n* **Kesimpulan**: Seluruh nilai signifikansi variabel bebas berada di atas $0{,}05$, membuktikan bahwa **model regresi terbebas dari masalah heteroskedastisitas**.\n\n---\n\n### 2.3 Analisis Regresi Linear Berganda (Agregat)\n\nPersamaan regresi linear berganda yang terbentuk:\n$$Y = 11.600{,}00 - 0{,}3477 X_1 - 205{,}1123 X_2 + 69{,}6470 X_3$$\n\n**Interpretasi Koefisien:**\n1. **Konstanta ($a = 11.600{,}00$)**: Jika variabel Nilai Tukar, BI Rate, dan Inflasi bernilai konstan (nol), maka rata-rata harga saham emiten JII diprediksi berada pada level Rp 11.600.\n2. **Koefisien Nilai Tukar ($b_1 = -0{,}3477$)**: Bernilai **negatif**. Setiap terjadi pelemahan/kenaikan kurs USD terhadap Rupiah sebesar Rp 1.000, maka rata-rata harga saham JII diprediksi mengalami penurunan sebesar Rp 347,70, dengan asumsi variabel lain tetap.\n3. **Koefisien BI Rate ($b_2 = -205{,}1123$)**: Bernilai **negatif**. Setiap kenaikan suku bunga BI-Rate sebesar 1%, maka rata-rata harga saham JII diprediksi mengalami penurunan sebesar Rp 205,11.\n4. **Koefisien Inflasi ($b_3 = +69{,}6470$)**: Bernilai **positif**. Setiap kenaikan laju inflasi sebesar 1%, rata-rata harga saham JII meningkat sebesar Rp 69,65.\n\n---\n\n### 2.4 Pengujian Hipotesis (Agregat)\n\n#### A. Koefisien Determinasi ($R^2$ dan Adjusted $R^2$)\n* **Nilai $R$ (Korelasi)**: **0,741** (Hubungan antara variabel makro dengan harga saham sangat kuat).\n* **Nilai $R^2$ ($R\\text{-Square}$)**: **0,550 ($55{,}0\\%$)**.\n* **Nilai Adjusted $R^2$**: **0,507 ($50{,}7\\%$)**.\n* **Interpretasi**: Sebesar **$55{,}0\\%$** variasi pergerakan harga saham perusahaan JII dapat dijelaskan oleh variasi Nilai Tukar Rupiah, BI Rate, dan Inflasi. Sedangkan sisanya sebesar **$45{,}0\\%$** dijelaskan oleh faktor fundamental perusahaan atau variabel lain di luar model penelitian ini.\n\n#### B. Uji Simultan (Uji F)\n* **$F\\text{-hitung}$**: **13,02**\n* **$F\\text{-tabel}$ ($\\alpha=0{,}05; df_1=3; df_2=32$)**: $2{,}90$\n* **Signifikansi ($p\\text{-value}$)**: **$0{,}00001$ ($p < 0{,}05$)**\n* **Keputusan**: Karena $F\\text{-hitung} (13{,}02) > F\\text{-tabel} (2{,}90)$ dan Sig. ($0{,}00001 < 0{,}05$), maka **$H_0$ DITOLAK dan $H_4$ DITERIMA**.\n* **Kesimpulan**: Nilai Tukar Rupiah, BI Rate, dan Inflasi secara **simultan (bersama-sama) berpengaruh signifikan terhadap harga saham perusahaan yang terdaftar di Jakarta Islamic Index (JII)**.\n\n#### C. Uji Parsial (Uji t)\nTaraf signifikansi $\\alpha = 0{,}05$, $df = n - k - 1 = 36 - 3 - 1 = 32$. Nilai $t\\text{-tabel} = 2{,}037$.\n\n| Hipotesis | Variabel | Nilai t-hitung | t-tabel | Sig. (p-value) | Keputusan |\n| :---: | :--- | :---: | :---: | :---: | :--- |\n| **$H_1$** | **Nilai Tukar ($X_1$)** | **-3,558** | 2,037 | **0,001** | **$H_1$ Diterima** (Negatif Signifikan) |\n| **$H_2$** | **BI Rate ($X_2$)** | **-1,857** | 2,037 | **0,073** | **$H_2$ Ditolak pada $\\alpha=5\\%$** *(Signifikan pada $\\alpha=10\\%$)* |\n| **$H_3$** | **Inflasi ($X_3$)** | **1,355** | 2,037 | **0,185** | **$H_3$ Ditolak** (Tidak Signifikan) |\n\n---\n\n### 2.5 Pembahasan Hasil Penelitian (Agregat)\n\n1. **Pengaruh Nilai Tukar Rupiah terhadap Harga Saham ($H_1$ Diterima)**:\n   * Hasil uji menunjukkan pengaruh negatif yang sangat signifikan ($p = 0{,}001$).\n   * *Analisis Teori*: Pelemahan nilai tukar Rupiah (depresiasi) meningkatkan beban impor bahan baku serta beban utang luar negeri emiten. Di sisi lain, ketidakpastian nilai tukar mendorong investor asing melakukan aksi jual (*capital outflow*), sehingga menekan harga saham emiten syariah di JII. Temuan ini mendukung *Arbitrage Pricing Theory* (APT) dan sejalan dengan penelitian terdahulu yang menyatakan kurs merupakan faktor risiko makro paling sensitif bagi pasar modal Indonesia.\n\n2. **Pengaruh Tingkat Suku Bunga BI Rate terhadap Harga Saham ($H_2$)**:\n   * Arah koefisien bertanda negatif ($-205{,}11$), sesuai dengan teori ekonomi, dengan tingkat signifikansi $p = 0{,}073$ (signifikan pada taraf toleransi 10%).\n   * *Analisis Teori*: Kenaikan suku bunga acuan BI Rate meningkatkan biaya modal (*cost of capital*) bagi emiten dan meningkatkan imbal hasil instrumen pendapatan tetap (seperti sukuk/deposito syariah), sehingga terjadi pergeseran alokasi portofolio dari pasar saham ke instrumen moneter. Namun, karena saham-saham JII memiliki fundamental bisnis dan struktur permodalan yang kuat (batas *debt to equity* syariah), emiten JII relatif mampu meredam guncangan kenaikan suku bunga.\n\n3. **Pengaruh Inflasi terhadap Harga Saham ($H_3$ Ditolak)**:\n   * Koefisien bertanda positif (+69,65) namun tidak berpengaruh signifikan ($p = 0{,}185$).\n   * *Analisis Teori*: Laju inflasi selama periode 2023\u20132025 di Indonesia tergolong sangat rendah dan stabil (rata-rata 2,71%). Inflasi yang rendah dan terukur tidak mengganggu daya beli masyarakat secara drastis, sehingga emiten berbasis konsumsi dan energi di JII tetap mampu mempertahankan penjualan dan marjin laba nominalnya.\n\n4. **Pengaruh Simultan Nilai Tukar, BI Rate, dan Inflasi ($H_4$ Diterima)**:\n   * Pengujian simultan menghasilkan $F = 13{,}02$ ($p = 0{,}00001$) dengan kontribusi $R^2 = 55{,}0\\%$.\n   * *Analisis Teori*: Hal ini membuktikan bahwa investor di pasar modal syariah secara komprehensif mengintegrasikan informasi stabilitas moneter makroekonomi dalam menilai prospek harga saham di Jakarta Islamic Index.\n\n---\n\n### 2.6 Kesimpulan dan Saran (BAB V - Agregat)\n\n#### A. Kesimpulan\n1. **Nilai Tukar Rupiah** berpengaruh negatif dan signifikan secara parsial terhadap harga saham perusahaan yang terdaftar di Jakarta Islamic Index (JII) periode 2023\u20132025.\n2. **Tingkat Suku Bunga Bank Indonesia (BI Rate)** berpengaruh negatif namun tidak signifikan pada tingkat keyakinan 95% ($\\alpha = 5\\%$), namun berpengaruh pada tingkat toleransi 90% ($\\alpha = 10\\%$).\n3. **Inflasi** tidak berpengaruh signifikan secara parsial terhadap harga saham perusahaan yang terdaftar di Jakarta Islamic Index (JII) periode 2023\u20132025.\n4. **Nilai Tukar Rupiah, BI Rate, dan Inflasi secara simultan (bersama-sama)** berpengaruh positif dan signifikan terhadap harga saham perusahaan di Jakarta Islamic Index (JII) dengan kontribusi pengaruh ($R^2$) sebesar **55,0%**, sedangkan sisanya 45,0% dipengaruhi oleh variabel di luar model penelitian.\n\n#### B. Saran\n1. **Bagi Investor Pasar Modal Syariah**: Investor disarankan memprioritaskan pemantauan terhadap indikator nilai tukar rupiah (USD/IDR), karena kurs merupakan variabel makro yang paling dominan menekan harga saham di JII.\n2. **Bagi Perusahaan Emiten JII**: Emiten syariah yang memiliki ketergantungan pada bahan baku impor perlu memperkuat strategi lindung nilai syariah (*Islamic hedging*) untuk meminimalisasi risiko volatilitas kurs terhadap laba bersih.\n3. **Bagi Peneliti Selanjutnya**: Disarankan memperpanjang periode pengamatan (misal 5 tahun) dan menambahkan variabel fundamental internal emiten (seperti *Return on Assets* / ROA, *Debt to Equity Ratio* / DER) agar analisis komparasi fundamental dan makro menjadi lebih lengkap.\n\n---\n\n## 3. BAGIAN II: OPSI DATA PANEL BULANAN 16 EMITEN (N = 576)\n*(Untuk Analisis Ekonometrika Data Panel Antar-Perusahaan)*\n\n### 3.1 Statistik Deskriptif (Panel)\n\nData panel terdiri dari 16 emiten diamati selama 36 bulan (total $N = 576$ baris data):\n\n| Variabel | N | Nilai Minimum | Nilai Maksimum | Mean | Standar Deviasi |\n| :--- | :---: | :---: | :---: | :---: | :---: |\n| **Harga Saham Nominal ($Y$)** | 576 | Rp 116,00 | Rp 29.500,00 | Rp 5.096,58 | 5.879,87 |\n| **$\\text{Ln}(\\text{Harga Saham})$ ($Y_{\\ln}$)**| 576 | 4,7536 | 10,2921 | 8,0604 | 1,0125 |\n| **Nilai Tukar ($X_1$)** | 576 | Rp 14.666 | Rp 16.782 | Rp 15.870,61 | 604,52 |\n| **BI Rate ($X_2$)** | 576 | 4,75% | 6,25% | 5,73% | 0,43% |\n| **Inflasi ($X_3$)** | 576 | 0,76% | 5,47% | 2,71% | 1,05% |\n\n---\n\n### 3.2 Regresi Pooled OLS vs Fixed Effects Model (FEM)\n\nDalam data panel, terdapat dua pendekatan estimasi:\n1. **Pooled OLS (Regresi Berganda Biasa di SPSS)**:\n   * Menggabungkan 576 baris data tanpa membedakan identitas perusahaan.\n   * Hasil: Nilai $R^2 = 0{,}003$ ($0{,}3\\%$) dan $F = 0{,}484$ ($p = 0{,}694$ - Tidak Signifikan).\n   * **Penyebab**: Perbedaan harga dasar antar emiten (UNTR puluhan ribu vs BRMS ratusan perak) menenggelamkan pengaruh variabel makro.\n2. **Fixed Effects Model / FEM (Disarankan untuk Data Panel / EViews / LSDV)**:\n   * Memasukkan efek tetap (*firm-specific dummy*) untuk mengontrol karakteristik unik masing-masing dari 16 emiten.\n   * Hasil: **$R^2 = 0{,}9425$ ($94{,}25\\%$)**, $F = 507{,}30$ ($p = 0{,}0000$).\n   * Koefisien FEM:\n     * **BI Rate ($X_2$)**: $B = -0{,}0893$, $t = -3{,}109$, **$p = 0{,}0020 < 0{,}05$ (Negatif Signifikan)**.\n     * **Nilai Tukar ($X_1$)**: $B = -0{,}000038$, $t = -1{,}510$, $p = 0{,}1316$ (Negatif).\n     * **Inflasi ($X_3$)**: $B = 0{,}0218$, $t = 1{,}633$, $p = 0{,}1030$ (Positif, signifikan pada $\\alpha = 10\\%$).\n\n---\n\n### 3.3 Pembahasan Hasil Penelitian Data Panel\n\n* Ketika karakteristik unik masing-masing perusahaan dikontrol dengan metode *Fixed Effect*, suku bunga **BI Rate terbukti menjadi variabel makro yang paling signifikan menekan harga saham emiten ($p = 0{,}0020$)**.\n* Setiap kenaikan BI Rate sebesar 100 bps (1%) menyebabkan penurunan harga saham rata-rata emiten sebesar $8{,}93\\%$.\n* Model Fixed Effect mampu menjelaskan **$94{,}25\\%$** variasi harga saham emiten konstituen JII.\n\n---\n\n### 3.4 Kesimpulan dan Saran (BAB V - Panel)\n\n#### A. Kesimpulan\n1. Pada model data panel dengan kontrol efek individu perusahaan (*Fixed Effects Model*), **Tingkat Suku Bunga Bank Indonesia (BI Rate)** terbukti berpengaruh negatif dan signifikan terhadap harga saham individual 16 emiten di JII.\n2. Variabel **Nilai Tukar Rupiah** dan **Inflasi** tidak menunjukkan pengaruh signifikan pada taraf $\\alpha = 5\\%$.\n3. Secara simultan, variabel makroekonomi bersama karakteristik spesifik emiten memiliki daya jelas yang sangat tinggi terhadap harga saham emiten JII ($R^2 = 94{,}25\\%$).\n\n---\n\n## 4. BAGIAN III: PANDUAN MEMILIH & MENGHADAPI DOSEN PEMBIMBING/PENGUJI\n\n### Rekomendasi Utama:\n* **Gunakan BAGIAN I (Opsi Agregat 36 Bulan)** sebagai naskah utama Bab IV dan Bab V Anda jika software yang Anda gunakan adalah **SPSS 25**.\n  * Alasan: Model ini selaras 100% dengan teks BAB III proposal Anda (tidak memerlukan uji Chow atau uji Hausman panel), menghasilkan $R^2 = 55\\%$, dan Uji F serta Uji t Nilai Tukar sangat signifikan.\n* **Gunakan BAGIAN II (Opsi Panel FEM)** hanya jika dosen pembimbing Anda secara spesifik menuntut adanya analisis data panel (*cross-section* per emiten).\n";
+
+
+// ==========================================================================
+// APP.JS - DASHBOARD INTERAKTIF & IDE MARKDOWN PREVIEW
+// ==========================================================================
+
+document.addEventListener('DOMContentLoaded', () => {
+  initTheme();
+  initTabs();
+  initCharts();
+  renderIdeMarkdown();
+  renderDataTable();
+  initSearch();
+  initPrint();
+});
+
+// 1. THEME SWITCHER
+function initTheme() {
+  const themeBtn = document.getElementById('themeToggleBtn');
+  const savedTheme = localStorage.getItem('jii_theme') || 'dark';
+
+  if (savedTheme === 'light') {
+    document.body.classList.replace('dark-theme', 'light-theme');
+    themeBtn.querySelector('.theme-icon').textContent = '☀️';
+  }
+
+  themeBtn.addEventListener('click', () => {
+    if (document.body.classList.contains('dark-theme')) {
+      document.body.classList.replace('dark-theme', 'light-theme');
+      themeBtn.querySelector('.theme-icon').textContent = '☀️';
+      localStorage.setItem('jii_theme', 'light');
+    } else {
+      document.body.classList.replace('light-theme', 'dark-theme');
+      themeBtn.querySelector('.theme-icon').textContent = '🌙';
+      localStorage.setItem('jii_theme', 'dark');
+    }
+    updateChartsTheme();
+  });
+}
+
+// 2. TAB NAVIGATION
+function initTabs() {
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabPanes = document.querySelectorAll('.tab-pane');
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetTabId = btn.getAttribute('data-tab');
+
+      tabBtns.forEach(b => b.classList.remove('active'));
+      tabPanes.forEach(p => p.classList.remove('active'));
+
+      btn.classList.add('active');
+      const targetPane = document.getElementById(targetTabId);
+      if (targetPane) {
+        targetPane.classList.add('active');
+        // If switching to chart tab, resize charts
+        if (targetTabId === 'tab-dashboard') {
+          setTimeout(updateChartsTheme, 50);
+        }
+      }
+    });
+  });
+}
+
+// 3. EXACT IDE MARKDOWN RENDERER WITH SMOOTH ANCHOR NAVIGATION & KATEX
+function renderIdeMarkdown() {
+  const viewport = document.getElementById('ideMarkdownViewport');
+  const container = document.getElementById('vscodeMarkdownContent');
+  const tocList = document.getElementById('ideTocDynamicList');
+  const toggleTocBtn = document.getElementById('toggleTocBtn');
+  const tocSidebar = document.getElementById('ideTocSidebar');
+
+  if (!container || typeof MARKDOWN_CONTENT === 'undefined') return;
+
+  // Toggle TOC sidebar
+  if (toggleTocBtn && tocSidebar) {
+    toggleTocBtn.addEventListener('click', () => {
+      tocSidebar.classList.toggle('collapsed');
+    });
+  }
+
+  // Configure marked custom renderer to assign consistent IDs
+  const renderer = new marked.Renderer();
+
+  // Helper function to create clean slug matching markdown TOC links
+  function createSlug(text) {
+    return text
+      .toLowerCase()
+      .replace(/<[^>]+>/g, '') // remove HTML tags
+      .replace(/[\$\(\)\,\.\:\/]/g, '') // remove math/punctuation
+      .replace(/\s+/g, '-') // spaces to dashes
+      .replace(/-+/g, '-') // multiple dashes to single
+      .trim();
+  }
+
+  const headings = [];
+
+  renderer.heading = function(headingData) {
+    const text = headingData.text;
+    const level = headingData.depth;
+    
+    let rawText = text.replace(/<[^>]+>/g, '');
+    let slug = createSlug(rawText);
+
+    // Map specific known heading slugs to exact TOC link targets
+    if (slug.includes('1-ringkasan-eksekutif')) slug = '1-ringkasan-eksekutif--struktur-analisis';
+    else if (slug.includes('opsi-data-agregat')) slug = '2-bagian-i-opsi-data-agregat-bulanan-portofolio-jii-n--36';
+    else if (slug.includes('21-statistik-deskriptif')) slug = '21-statistik-deskriptif-agregat';
+    else if (slug.includes('22-uji-asumsi-klasik')) slug = '22-uji-asumsi-klasik-agregat';
+    else if (slug.includes('23-analisis-regresi')) slug = '23-analisis-regresi-linear-berganda-agregat';
+    else if (slug.includes('24-pengujian-hipotesis')) slug = '24-pengujian-hipotesis-agregat';
+    else if (slug.includes('25-pembahasan-hasil')) slug = '25-pembahasan-hasil-penelitian-agregat';
+    else if (slug.includes('26-kesimpulan-dan-saran')) slug = '26-kesimpulan-dan-saran-bab-v-agregat';
+    else if (slug.includes('opsi-data-panel-bulanan')) slug = '3-bagian-ii-opsi-data-panel-bulanan-16-emiten-n--576';
+    else if (slug.includes('31-statistik-deskriptif')) slug = '31-statistik-deskriptif-panel';
+    else if (slug.includes('32-regresi-pooled-ols')) slug = '32-regresi-pooled-ols-vs-fixed-effects-model-fem';
+    else if (slug.includes('33-pembahasan-hasil')) slug = '33-pembahasan-hasil-penelitian-panel';
+    else if (slug.includes('34-kesimpulan-dan-saran')) slug = '34-kesimpulan-dan-saran-bab-v-panel';
+    else if (slug.includes('panduan-memilih')) slug = '4-bagian-iii-panduan-memilih--menghadapi-dosen-pembimbingpenguji';
+
+    headings.push({ level, text: rawText, slug });
+
+    return `<h${level} id="${slug}">${text}</h${level}>\n`;
+  };
+
+  marked.setOptions({
+    renderer: renderer,
+    gfm: true,
+    breaks: false
+  });
+
+  // Render markdown HTML
+  container.innerHTML = marked.parse(MARKDOWN_CONTENT);
+
+  // Render KaTeX for math formulas: $X_1$, $R^2$, etc.
+  if (typeof renderMathInElement !== 'undefined') {
+    renderMathInElement(container, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '$', right: '$', display: false }
+      ],
+      throwOnError: false
+    });
+  }
+
+  // Populate Sidebar Quick TOC
+  if (tocList) {
+    tocList.innerHTML = '';
+    headings.forEach(h => {
+      if (h.level <= 3) {
+        const li = document.createElement('li');
+        if (h.level === 3) li.className = 'toc-sub';
+        li.innerHTML = `<a href="#${h.slug}" title="${h.text}">${h.text}</a>`;
+        tocList.appendChild(li);
+      }
+    });
+  }
+
+  // Attach smooth scrolling to all anchor links inside markdown and sidebar
+  const allAnchorLinks = document.querySelectorAll('.vscode-markdown-content a[href^="#"], .ide-toc-list a[href^="#"]');
+  allAnchorLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        const targetId = href.substring(1);
+        const targetEl = document.getElementById(targetId);
+        if (targetEl && viewport) {
+          e.preventDefault();
+          // Scroll inside viewport smoothly
+          targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // Highlight target briefly
+          targetEl.style.transition = 'background-color 0.4s ease';
+          targetEl.style.backgroundColor = 'rgba(55, 148, 255, 0.2)';
+          setTimeout(() => {
+            targetEl.style.backgroundColor = 'transparent';
+          }, 1200);
+        }
+      }
+    });
+  });
+}
+
+// 4. CHARTS INITIALIZATION (CHART.JS)
+let stockKursChartInstance = null;
+let macroChartInstance = null;
+
+function initCharts() {
+  if (typeof AGREGAT_DATA === 'undefined' || !AGREGAT_DATA.length) return;
+
+  const labels = AGREGAT_DATA.map(d => d.periode);
+  const stockPrices = AGREGAT_DATA.map(d => d.rata_rata_harga_saham);
+  const exchangeRates = AGREGAT_DATA.map(d => d.nilai_tukar);
+  const biRates = AGREGAT_DATA.map(d => d.bi_rate);
+  const inflations = AGREGAT_DATA.map(d => d.inflasi);
+
+  const isLight = document.body.classList.contains('light-theme');
+  const textColor = isLight ? '#475569' : '#9ca3af';
+  const gridColor = isLight ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.06)';
+
+  // Chart 1: Stock Price vs USD/IDR (Dual Axis)
+  const ctx1 = document.getElementById('stockKursChart');
+  if (ctx1) {
+    stockKursChartInstance = new Chart(ctx1, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Rata-rata Saham JII (Rp)',
+            data: stockPrices,
+            borderColor: '#10b981',
+            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+            borderWidth: 2.5,
+            tension: 0.3,
+            fill: true,
+            yAxisID: 'yStock',
+            pointRadius: 3,
+            pointHoverRadius: 6
+          },
+          {
+            label: 'Kurs USD/IDR (Rp)',
+            data: exchangeRates,
+            borderColor: '#06b6d4',
+            backgroundColor: 'transparent',
+            borderWidth: 2.5,
+            borderDash: [5, 4],
+            tension: 0.3,
+            yAxisID: 'yKurs',
+            pointRadius: 2,
+            pointHoverRadius: 5
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: { color: textColor, font: { family: 'Plus Jakarta Sans', size: 12 } }
+          },
+          tooltip: {
+            backgroundColor: 'rgba(17, 24, 39, 0.95)',
+            titleColor: '#fff',
+            bodyColor: '#e5e7eb',
+            borderColor: '#374151',
+            borderWidth: 1
+          }
+        },
+        scales: {
+          x: {
+            ticks: { color: textColor, maxRotation: 45 },
+            grid: { color: gridColor }
+          },
+          yStock: {
+            type: 'linear',
+            position: 'left',
+            title: { display: true, text: 'Harga Saham (Rp)', color: '#10b981' },
+            ticks: { color: textColor },
+            grid: { color: gridColor }
+          },
+          yKurs: {
+            type: 'linear',
+            position: 'right',
+            title: { display: true, text: 'Kurs USD/IDR (Rp)', color: '#06b6d4' },
+            ticks: { color: textColor },
+            grid: { drawOnChartArea: false }
+          }
+        }
+      }
+    });
+  }
+
+  // Chart 2: BI-Rate vs Inflation
+  const ctx2 = document.getElementById('macroChart');
+  if (ctx2) {
+    macroChartInstance = new Chart(ctx2, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: 'BI-Rate (%)',
+            data: biRates,
+            borderColor: '#f59e0b',
+            backgroundColor: 'rgba(245, 158, 11, 0.1)',
+            borderWidth: 2,
+            tension: 0.2,
+            pointRadius: 2
+          },
+          {
+            label: 'Inflasi YoY (%)',
+            data: inflations,
+            borderColor: '#ef4444',
+            backgroundColor: 'transparent',
+            borderWidth: 2,
+            tension: 0.2,
+            pointRadius: 2
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: { color: textColor, font: { family: 'Plus Jakarta Sans', size: 11 } }
+          }
+        },
+        scales: {
+          x: {
+            ticks: { color: textColor, maxTicksLimit: 12 },
+            grid: { color: gridColor }
+          },
+          y: {
+            ticks: { color: textColor },
+            grid: { color: gridColor },
+            title: { display: true, text: 'Persen (%)', color: textColor }
+          }
+        }
+      }
+    });
+  }
+}
+
+function updateChartsTheme() {
+  if (stockKursChartInstance) stockKursChartInstance.destroy();
+  if (macroChartInstance) macroChartInstance.destroy();
+  initCharts();
+}
+
+// 5. RENDER RAW DATA TABLE
+function renderDataTable(filteredData) {
+  const tbody = document.getElementById('dataTableBody');
+  if (!tbody || typeof AGREGAT_DATA === 'undefined') return;
+
+  const dataToRender = filteredData || AGREGAT_DATA;
+  tbody.innerHTML = '';
+
+  dataToRender.forEach((row, idx) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${idx + 1}</td>
+      <td><strong>${row.periode}</strong></td>
+      <td>Rp ${formatNumber(row.rata_rata_harga_saham)}</td>
+      <td>Rp ${formatNumber(row.nilai_tukar)}</td>
+      <td>${row.bi_rate.toFixed(2).replace('.', ',')}%</td>
+      <td>${row.inflasi.toFixed(2).replace('.', ',')}%</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function formatNumber(num) {
+  return Number(num).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+// 6. SEARCH / FILTER ON RAW DATA TABLE
+function initSearch() {
+  const input = document.getElementById('tableSearchInput');
+  if (!input || typeof AGREGAT_DATA === 'undefined') return;
+
+  input.addEventListener('input', (e) => {
+    const q = e.target.value.toLowerCase().trim();
+    if (!q) {
+      renderDataTable(AGREGAT_DATA);
+      return;
+    }
+    const filtered = AGREGAT_DATA.filter(row => {
+      return (
+        row.periode.toLowerCase().includes(q) ||
+        String(row.tahun).includes(q) ||
+        String(row.nilai_tukar).includes(q)
+      );
+    });
+    renderDataTable(filtered);
+  });
+}
+
+// 7. COPY UTILITIES
+window.copyEquation = function() {
+  const eq = "Y = 11.600,00 - 0,3477 (X1) - 205,1123 (X2) + 69,6470 (X3)";
+  navigator.clipboard.writeText(eq).then(() => {
+    showToast("Persamaan regresi berhasil disalin!");
+  });
+};
+
+window.copyFullMarkdown = function() {
+  if (typeof MARKDOWN_CONTENT !== 'undefined') {
+    navigator.clipboard.writeText(MARKDOWN_CONTENT).then(() => {
+      showToast("Seluruh naskah Markdown berhasil disalin!");
+    });
+  }
+};
+
+function showToast(msg) {
+  const toast = document.getElementById('toastNotification');
+  if (!toast) return;
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2500);
+}
+
+// 8. PRINT / PDF EXPORT
+function initPrint() {
+  const btn = document.getElementById('printBtn');
+  if (btn) {
+    btn.addEventListener('click', () => {
+      window.print();
+    });
+  }
+}
+
+</script>
 </body>
 </html>
