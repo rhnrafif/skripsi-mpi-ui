@@ -1254,9 +1254,6 @@ body.light-theme .equation-box {
         <button class="tab-btn" data-tab="tab-kesimpulan">
           💡 Kesimpulan & Saran (Bab V)
         </button>
-        <button class="tab-btn" data-tab="tab-panel">
-          ⚖️ Komparasi Opsi Panel (576 Data)
-        </button>
         <button class="tab-btn" data-tab="tab-data">
           📁 Dataset Runtun Waktu
         </button>
@@ -1304,6 +1301,50 @@ body.light-theme .equation-box {
 
       <!-- TAB 2: DASHBOARD & GRAFIK -->
       <div class="tab-pane" id="tab-dashboard">
+        <!-- INFO CARDS: INDIKATOR & CARA PENGUKURAN (OPSI 1) -->
+        <div class="card mb-4" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.04), rgba(59, 130, 246, 0.04)); border: 1px solid rgba(16, 185, 129, 0.25); margin-bottom: 24px;">
+          <div class="card-header flex-between">
+            <div>
+              <h2 class="card-title" style="display: flex; align-items: center; gap: 8px;">
+                <span>📐 Definisi Operasional, Indikator & Pengukuran (Opsi 1 Agregat)</span>
+              </h2>
+              <p class="card-desc">Ke-16 emiten dihitung 100% dan diagregatkan menjadi 1 nilai portofolio rata-rata per bulan (N = 36 Bulan Observasi):</p>
+            </div>
+            <span class="badge badge-emerald">Standar BAB III Skripsi</span>
+          </div>
+
+          <div class="grid-2-col mt-3" style="gap: 16px;">
+            <div style="background: rgba(0,0,0,0.2); padding: 14px; border-radius: 8px; border-left: 3px solid #10b981;">
+              <h4 style="margin: 0 0 6px 0; color: #10b981; font-size: 0.95rem;">📈 Y: Harga Saham JII (Closing Price Portofolio)</h4>
+              <p style="margin: 0; font-size: 0.85rem; line-height: 1.45; color: var(--text-muted);">
+                Rata-rata harga penutupan (<strong>Closing Price</strong>) dari 16 emiten konsisten JII pada hari bursa terakhir setiap bulan (Jan 2023 – Des 2025). 
+                Harga closing ke-16 emiten dijumlahkan lalu dibagi 16 (Satuan: <strong>Rupiah / lembar saham</strong>).
+              </p>
+            </div>
+
+            <div style="background: rgba(0,0,0,0.2); padding: 14px; border-radius: 8px; border-left: 3px solid #3b82f6;">
+              <h4 style="margin: 0 0 6px 0; color: #3b82f6; font-size: 0.95rem;">💵 X1: Nilai Tukar Rupiah (Kurs Tengah BI)</h4>
+              <p style="margin: 0; font-size: 0.85rem; line-height: 1.45; color: var(--text-muted);">
+                Menggunakan <strong>Kurs Transaksi Tengah Bank Indonesia (USD/IDR)</strong> pada hari kerja terakhir setiap bulan: 
+                <code>(Kurs Jual + Kurs Beli) / 2</code>. Sumber resmi data: SEKI Bank Indonesia (Satuan: <strong>Rp per 1 USD</strong>).
+              </p>
+            </div>
+
+            <div style="background: rgba(0,0,0,0.2); padding: 14px; border-radius: 8px; border-left: 3px solid #f59e0b;">
+              <h4 style="margin: 0 0 6px 0; color: #f59e0b; font-size: 0.95rem;">🏦 X2: Suku Bunga BI-Rate (BI7DRR)</h4>
+              <p style="margin: 0; font-size: 0.85rem; line-height: 1.45; color: var(--text-muted);">
+                Suku bunga kebijakan moneter resmi yang diputuskan dalam <strong>Rapat Dewan Gubernur (RDG) Bank Indonesia</strong> pada setiap bulannya (Satuan: <strong>Persen per tahun / %</strong>).
+              </p>
+            </div>
+
+            <div style="background: rgba(0,0,0,0.2); padding: 14px; border-radius: 8px; border-left: 3px solid #ec4899;">
+              <h4 style="margin: 0 0 6px 0; color: #ec4899; font-size: 0.95rem;">📊 X3: Inflasi IHK Tahunan (YoY BPS)</h4>
+              <p style="margin: 0; font-size: 0.85rem; line-height: 1.45; color: var(--text-muted);">
+                Laju inflasi tahunan (<strong>Year-on-Year / YoY</strong>) yang dirilis secara berkala oleh Badan Pusat Statistik (BPS) pada awal setiap bulan (Satuan: <strong>Persen per tahun / %</strong>).
+              </p>
+            </div>
+          </div>
+        </div>
         <div class="card card-chart">
           <div class="card-header flex-between">
             <div>
@@ -1654,74 +1695,7 @@ body.light-theme .equation-box {
         </div>
       </div>
 
-      <!-- TAB 5: KOMPARASI OPSI PANEL (576 DATA) -->
-      <div class="tab-pane" id="tab-panel">
-        <div class="card">
-          <div class="card-header">
-            <h2 class="card-title">Komparasi: Opsi Agregat (36 Bulan) vs Opsi Panel (576 Data)</h2>
-            <p class="card-desc">Perbandingan akademis untuk memahami perbedaan jika data diolah per portofolio vs individual emiten.</p>
-          </div>
-
-          <div class="table-responsive">
-            <table class="styled-table">
-              <thead>
-                <tr>
-                  <th>Parameter Pembanding</th>
-                  <th>Opsi Agregat (36 Bulan) ⭐</th>
-                  <th>Opsi Panel OLS Biasa</th>
-                  <th>Opsi Panel Fixed Effects (FEM)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>Jumlah Sampel (N)</strong></td>
-                  <td>36 Bulan</td>
-                  <td>576 Data</td>
-                  <td>576 Data (16 emiten × 36 bln)</td>
-                </tr>
-                <tr>
-                  <td><strong>Kesesuaian dengan Bab III</strong></td>
-                  <td><span class="status-pill green">100% Selaras (SPSS 25)</span></td>
-                  <td>Selaras di SPSS</td>
-                  <td>Perlu EViews / Uji Chow</td>
-                </tr>
-                <tr>
-                  <td><strong>Koefisien Determinasi (R²)</strong></td>
-                  <td><strong>55,0%</strong> (Sangat Pas)</td>
-                  <td>0,3% (Sangat Kecil)</td>
-                  <td><strong>94,25%</strong> (Sangat Tinggi)</td>
-                </tr>
-                <tr>
-                  <td><strong>Uji F (Simultan)</strong></td>
-                  <td><strong>13,02 (Signifikan)</strong></td>
-                  <td>0,48 (Tidak Signifikan)</td>
-                  <td><strong>507,30 (Signifikan)</strong></td>
-                </tr>
-                <tr>
-                  <td><strong>Uji t Kurs Rupiah</strong></td>
-                  <td><strong>t = -3,558 (p = 0,001)</strong></td>
-                  <td>t = -0,367 (p = 0,713)</td>
-                  <td>t = -1,510 (p = 0,132)</td>
-                </tr>
-                <tr>
-                  <td><strong>Uji t BI-Rate</strong></td>
-                  <td>t = -1,857 (p = 0,073)</td>
-                  <td>t = -0,756 (p = 0,450)</td>
-                  <td><strong>t = -3,109 (p = 0,002)</strong></td>
-                </tr>
-                <tr>
-                  <td><strong>Kemudahan Sidang</strong></td>
-                  <td><span class="status-pill green">Sangat Aman & Mudah</span></td>
-                  <td><span class="status-pill red">Rentan Dipertanyakan</span></td>
-                  <td><span class="status-pill yellow">Butuh Ekonometrika Lanjut</span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <!-- TAB 6: DATASET RUNTUN WAKTU -->
+<!-- TAB 6: DATASET RUNTUN WAKTU -->
       <div class="tab-pane" id="tab-data">
         <div class="card">
           <div class="card-header flex-between">

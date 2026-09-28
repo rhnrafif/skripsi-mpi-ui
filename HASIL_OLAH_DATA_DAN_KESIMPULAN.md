@@ -15,20 +15,23 @@
 
 ## DAFTAR ISI DOKUMEN
 1. [Ringkasan Eksekutif & Jawaban Penting Pembimbing](#1-ringkasan-eksekutif--jawaban-penting-pembimbing)
-2. [Statistik Deskriptif Data Agregat](#2-statistik-deskriptif-data-agregat)
-3. [Uji Asumsi Klasik & Solusi Ilmiah Autokorelasi](#3-uji-asumsi-klasik--solusi-ilmiah-autokorelasi)
-   - [3.1 Uji Normalitas Residual](#31-uji-normalitas-residual)
-   - [3.2 Uji Multikolinearitas](#32-uji-multikolinearitas)
-   - [3.3 Uji Autokorelasi & Mengapa HAC Newey-West Dipakai](#33-uji-autokorelasi--mengapa-hac-newey-west-dipakai)
-   - [3.4 Uji Heteroskedastisitas](#34-uji-heteroskedastisitas)
-4. [Analisis Regresi Linear Berganda (EViews HAC vs OLS Standar)](#4-analisis-regresi-linear-berganda-eviews-hac-vs-ols-standar)
-5. [Pengujian Hipotesis (Koefisien Determinasi, Uji F, dan Uji t)](#5-pengujian-hipotesis-koefisien-determinasi-uji-f-dan-uji-t)
-   - [5.1 Koefisien Determinasi (R-Square)](#51-koefisien-determinasi-r-square)
-   - [5.2 Uji Simultan (Uji F)](#52-uji-simultan-uji-f)
-   - [5.3 Uji Parsial (Uji t) - Perbandingan Standar vs EViews HAC](#53-uji-parsial-uji-t---perbandingan-standar-vs-eviews-hac)
-6. [Pembahasan Hasil Penelitian (BAB IV)](#6-pembahasan-hasil-penelitian-bab-iv)
-7. [Kesimpulan dan Saran (BAB V)](#7-kesimpulan-dan-saran-bab-v)
-8. [Panduan Teknis Langkah Olah Data di EViews](#8-panduan-teknis-langkah-olah-data-di-eviews)
+2. [Definisi Operasional, Indikator, dan Cara Pengukuran Variabel (Opsi 1)](#2-definisi-operasional-indikator-dan-cara-pengukuran-variabel-opsi-1)
+   - [2.1 Penjelasan Bahasa Sederhana: Mengapa N = 36 Bulan?](#21-penjelasan-bahasa-sederhana-mengapa-n--36-bulan)
+   - [2.2 Tabel Indikator dan Pengukuran Variabel (Standar BAB III Skripsi)](#22-tabel-indikator-dan-pengukuran-variabel-standar-bab-iii-skripsi)
+3. [Statistik Deskriptif Data Agregat](#3-statistik-deskriptif-data-agregat)
+4. [Uji Asumsi Klasik & Solusi Ilmiah Autokorelasi](#4-uji-asumsi-klasik--solusi-ilmiah-autokorelasi)
+   - [4.1 Uji Normalitas Residual](#41-uji-normalitas-residual)
+   - [4.2 Uji Multikolinearitas](#42-uji-multikolinearitas)
+   - [4.3 Uji Autokorelasi & Mengapa HAC Newey-West Dipakai](#43-uji-autokorelasi--mengapa-hac-newey-west-dipakai)
+   - [4.4 Uji Heteroskedastisitas](#44-uji-heteroskedastisitas)
+5. [Analisis Regresi Linear Berganda (EViews HAC vs OLS Standar)](#5-analisis-regresi-linear-berganda-eviews-hac-vs-ols-standar)
+6. [Pengujian Hipotesis (Koefisien Determinasi, Uji F, dan Uji t)](#6-pengujian-hipotesis-koefisien-determinasi-uji-f-dan-uji-t)
+   - [6.1 Koefisien Determinasi (R-Square)](#61-koefisien-determinasi-r-square)
+   - [6.2 Uji Simultan (Uji F)](#62-uji-simultan-uji-f)
+   - [6.3 Uji Parsial (Uji t) - Perbandingan Standar vs EViews HAC](#63-uji-parsial-uji-t---perbandingan-standar-vs-eviews-hac)
+7. [Pembahasan Hasil Penelitian (BAB IV)](#7-pembahasan-hasil-penelitian-bab-iv)
+8. [Kesimpulan dan Saran (BAB V)](#8-kesimpulan-dan-saran-bab-v)
+9. [Panduan Teknis Langkah Olah Data di EViews](#9-panduan-teknis-langkah-olah-data-di-eviews)
 
 ---
 
@@ -53,7 +56,45 @@ Penelitian ini menggunakan **OPSI 1**, yaitu data deret waktu bulanan (*Monthly 
 
 ---
 
-## 2. STATISTIK DESKRIPTIF DATA AGREGAT
+## 2. DEFINISI OPERASIONAL, INDIKATOR, DAN CARA PENGUKURAN VARIABEL (OPSI 1)
+
+### 2.1 Penjelasan Bahasa Sederhana: Mengapa N = 36 Bulan?
+Banyak mahasiswa atau penguji bertanya:  
+*"Penelitian ini meneliti 16 perusahaan emiten, kenapa jumlah datanya hanya N = 36 baris? Apakah perusahaannya tidak dihitung?"*
+
+**Jawabannya: Ke-16 Perusahaan tersebut SUDAH DIHITUNG 100%!**  
+Perbedaannya hanya pada cara penyajian matematisnya:
+* Model ini **bukan menjejerkan data per perusahaan secara individual**, melainkan **menggabungkan (mengagregasikan) 16 perusahaan menjadi satu kesatuan: 'Portofolio Indeks Pasar Saham JII'**.
+* Periode penelitian adalah 3 tahun: 2023, 2024, dan 2025.
+* $3\text{ Tahun} \times 12\text{ Bulan} = \mathbf{36\text{ Bulan Observasi (N = 36)}}$.
+
+#### 💡 Contoh Nyata Cara Menghitung Angka Setiap Bulan:
+Misalkan pada bulan **Januari 2023**:
+1. Peneliti mencatat harga penutupan (*closing price*) pada hari bursa terakhir untuk masing-masing dari 16 emiten:
+   * ADRO: Rp 2.960
+   * ANTM: Rp 2.310
+   * BRIS: Rp 1.335
+   * ... *(dilanjutkan hingga emiten ke-16 UNVR: Rp 4.500)*
+2. Seluruh harga penutupan ke-16 saham tersebut **dijumlahkan lalu dibagi 16**.
+3. Didapatlah angka **Rp 5.472,12**. Angka inilah yang disebut **Rata-rata Harga Saham JII Bulan Januari 2023**.
+4. Langkah yang sama diulangi untuk 36 bulan ke depan, sehingga terbentuk **36 baris data resmi**.
+
+---
+
+### 2.2 Tabel Indikator dan Pengukuran Variabel (Standar BAB III Skripsi)
+
+Berikut adalah tabel rincian definisi operasional, indikator, dan rumus pengukuran yang dapat langsung dicantumkan pada naskah **BAB III (Metodologi Penelitian)**:
+
+| No | Variabel | Simbol | Definisi Sederhana | Indikator & Rumus Pengukuran | Satuan | Sumber Data |
+| :-: | :--- | :---: | :--- | :--- | :---: | :--- |
+| 1 | **Harga Saham JII** *(Dependen)* | **$Y$** | Nilai pasar rata-rata dari portofolio saham syariah unggulan di BEI. | **Rata-rata Harga Penutupan (*Closing Price*)** akhir bulan dari 16 emiten syariah konstituen konsisten JII:<br>$$\bar{Y}_t = \frac{\sum_{i=1}^{16} \text{Closing Price}_{i,t}}{16}$$ | Rupiah per lembar saham (Rp) | Laporan Resmi Bursa Efek Indonesia (IDX) & Yahoo Finance |
+| 2 | **Nilai Tukar Rupiah** *(Independen)* | **$X_1$** | Harga nilai tukar mata uang Rupiah terhadap Dolar Amerika Serikat (USD/IDR). | **Kurs Transaksi Tengah Bank Indonesia** pada hari kerja terakhir setiap bulan:<br>$$\text{Kurs Tengah} = \frac{\text{Kurs Jual} + \text{Kurs Beli}}{2}$$ | Rupiah per 1 USD (Rp) | Statistik Ekonomi dan Keuangan Indonesia (SEKI - BI) |
+| 3 | **Suku Bunga BI-Rate** *(Independen)* | **$X_2$** | Tingkat suku bunga acuan kebijakan moneter yang ditetapkan oleh Bank Indonesia. | Tingkat suku bunga acuan resmi Bank Indonesia (**BI-Rate / BI-7 Day Reverse Repo Rate**) yang ditetapkan pada Rapat Dewan Gubernur (RDG) bulanan Bank Indonesia. | Persen per tahun (%) | Publikasi Resmi Bank Indonesia (*bi.go.id*) |
+| 4 | **Tingkat Inflasi** *(Independen)* | **$X_3$** | Laju kenaikan harga barang dan jasa secara umum dan terus-menerus. | Laju inflasi tahunan Indeks Harga Konsumen (**Inflasi IHK *Year-on-Year / YoY***) yang dirilis resmi oleh Badan Pusat Statistik (BPS) setiap bulannya. | Persen per tahun (%) | Berita Resmi Statistik (BRS) - BPS (*bps.go.id*) |
+
+---
+
+## 3. STATISTIK DESKRIPTIF DATA AGREGAT
 
 Tabel berikut menyajikan statistik deskriptif untuk data 36 bulan observasi (Januari 2023 – Desember 2025):
 
@@ -72,15 +113,15 @@ Tabel berikut menyajikan statistik deskriptif untuk data 36 bulan observasi (Jan
 
 ---
 
-## 3. UJI ASUMSI KLASIK & SOLUSI ILMIAH AUTOKORELASI
+## 4. UJI ASUMSI KLASIK & SOLUSI ILMIAH AUTOKORELASI
 
-### 3.1 Uji Normalitas Residual
+### 4.1 Uji Normalitas Residual
 * **Metode**: Kolmogorov-Smirnov (K-S) & Jarque-Bera (JB di EViews).
 * **Nilai Sig. K-S**: **0,8455** ( > 0{,}05$).
 * **Jarque-Bera (EViews)**: {,}510$ dengan **Prob(JB) = 0,775** ( > 0{,}05$).
 * **Kesimpulan**: Nilai residual berdistribusi secara normal. Asumsi normalitas terpenuhi secara sempurna.
 
-### 3.2 Uji Multikolinearitas
+### 4.2 Uji Multikolinearitas
 Kriteria: Nilai *Tolerance* $> 0{,}10$ dan VIF $< 10{,}00$.
 
 | Variabel Independen | Tolerance | VIF | Keterangan |
@@ -91,7 +132,7 @@ Kriteria: Nilai *Tolerance* $> 0{,}10$ dan VIF $< 10{,}00$.
 
 * **Kesimpulan**: Seluruh variabel memiliki nilai VIF jauh di bawah angka 10. Tidak terdapat gejala multikolinearitas antar variabel independen.
 
-### 3.3 Uji Autokorelasi & Mengapa HAC Newey-West Dipakai
+### 4.3 Uji Autokorelasi & Mengapa HAC Newey-West Dipakai
 * **Nilai Durbin-Watson ($)**: **0,9808**
 * **Nilai Tabel DW ($lpha=0{,}05, n=36, k=3$)**:  = 1{,}295$,  = 1{,}654$.
 * **Hasil Uji Konvensional**: Nilai  < d_L$ mengindikasikan adanya autokorelasi positif tingkat satu ((1)$).
@@ -106,13 +147,13 @@ Autokorelasi pada data deret waktu harga saham bulanan adalah **fenomena yang sa
 #### Solusi Standar Emas Modern: EViews HAC (Newey-West)
 Sesuai rujukan ekonometrika modern (*Stock & Watson*; *Wooldridge*), cara paling sahih adalah **membiarkan model pada level aslinya, lalu mengoreksi varians-kovarians dengan metode *Heteroskedasticity and Autocorrelation Consistent* (HAC Newey-West)**. Dengan metode ini, nilai koefisien tetap murni dan uji t menjadi valid 100% tanpa bias.
 
-### 3.4 Uji Heteroskedastisitas
+### 4.4 Uji Heteroskedastisitas
 * **Metode Glejser**: Nilai Sig untuk $ ({,}5012$), $ ({,}8744$), dan $ ({,}0553$) seluruhnya $> 0{,}05$.
 * **Kesimpulan**: Model terbebas dari masalah heteroskedastisitas (varian residual bersifat homogen/homoskedastik).
 
 ---
 
-## 4. ANALISIS REGRESI LINEAR BERGANDA (EVIEWS HAC VS OLS STANDAR)
+## 5. ANALISIS REGRESI LINEAR BERGANDA (EVIEWS HAC VS OLS STANDAR)
 
 ### Output Resmi Regresi EViews HAC (Newey-West):
 `	ext
@@ -150,7 +191,7 @@ Y = 11.600{,}58 - 0{,}3477 X_1 - 205{,}1123 X_2 + 69{,}6470 X_3
 
 ---
 
-## 5. PENGUJIAN HIPOTESIS (KOEFISIEN DETERMINASI, UJI F, DAN UJI T)
+## 6. PENGUJIAN HIPOTESIS (KOEFISIEN DETERMINASI, UJI F, DAN UJI T)
 
 ### 5.1 Koefisien Determinasi (^2$ dan Adjusted ^2$)
 * **Nilai $ (Korelasi)**: **0,741** (Tingkat hubungan antara variabel makro dengan harga saham sangat kuat).
@@ -158,13 +199,13 @@ Y = 11.600{,}58 - 0{,}3477 X_1 - 205{,}1123 X_2 + 69{,}6470 X_3
 * **Nilai Adjusted ^2$**: **0,507 ({,}7\%$)**.
 * **Interpretasi**: Sebesar **{,}0\%$** variasi pergerakan harga saham konstituen JII mampu dijelaskan secara bersama-sama oleh Nilai Tukar Rupiah, BI Rate, dan Inflasi. Sisanya sebesar **{,}0\%$** dijelaskan oleh faktor fundamental mikro perusahaan serta sentimen pasar di luar model penelitian.
 
-### 5.2 Uji Simultan (Uji F)
+### 6.2 Uji Simultan (Uji F)
 * **Nilai 	ext{-hitung}$**: **13,08**
 * **Nilai 	ext{-tabel}$ ($lpha=0{,}05; df_1=3; df_2=32$)**: {,}90$
 * **Signifikansi (	ext{-value}$)**: **{,}000009$ ( < 0{,}05$)**
 * **Kesimpulan**: Karena 	ext{-hitung} (13{,}08) > F	ext{-tabel} (2{,}90)$ dan Sig. $< 0{,}05$, maka **$ DITERIMA**. Nilai Tukar Rupiah, BI Rate, dan Inflasi secara **simultan berpengaruh signifikan** terhadap harga saham perusahaan yang terdaftar di Jakarta Islamic Index (JII).
 
-### 5.3 Uji Parsial (Uji t) - Perbandingan Standar vs EViews HAC
+### 6.3 Uji Parsial (Uji t) - Perbandingan Standar vs EViews HAC
 
 Taraf signifikansi $lpha = 0{,}05$,  = 32$, nilai 	ext{-tabel} = 2{,}037$.
 
@@ -180,7 +221,7 @@ Taraf signifikansi $lpha = 0{,}05$,  = 32$, nilai 	ext{-tabel} = 2{,}037$.
 
 ---
 
-## 6. PEMBAHASAN HASIL PENELITIAN (BAB IV)
+## 7. PEMBAHASAN HASIL PENELITIAN (BAB IV)
 
 ### 1. Pengaruh Nilai Tukar Rupiah terhadap Harga Saham ($ Diterima)
 * Nilai koefisien $-0{,}3477$ dengan  = -3{,}7069$ dan  = 0{,}0008 < 0{,}05$.
@@ -200,7 +241,7 @@ Taraf signifikansi $lpha = 0{,}05$,  = 32$, nilai 	ext{-tabel} = 2{,}037$.
 
 ---
 
-## 7. KESIMPULAN DAN SARAN (BAB V)
+## 8. KESIMPULAN DAN SARAN (BAB V)
 
 ### A. Kesimpulan
 1. **Nilai Tukar Rupiah** berpengaruh negatif dan signifikan secara parsial terhadap harga saham perusahaan yang terdaftar di Jakarta Islamic Index (JII) periode 2023–2025 ( = 0{,}0008$).
@@ -215,7 +256,7 @@ Taraf signifikansi $lpha = 0{,}05$,  = 32$, nilai 	ext{-tabel} = 2{,}037$.
 
 ---
 
-## 8. PANDUAN TEKNIS LANGKAH OLAH DATA DI EVIEWS
+## 9. PANDUAN TEKNIS LANGKAH OLAH DATA DI EVIEWS
 
 Ikuti 4 langkah mudah ini saat Anda mempraktikkannya langsung di aplikasi EViews:
 
