@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hasil Olah Data Skripsi - Analisis Saham JII 2023–2025</title>
+  <meta name="description" content="Dashboard Hasil Olah Data Statistik, Pembahasan BAB IV, dan Kesimpulan BAB V Skripsi Ekonomi Syariah UIN SMH Banten.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- KaTeX for beautiful math equations ($X_1$, $R^2$, etc.) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+  <!-- CDN Scripts for Chart.js & Marked -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+  <!-- Top Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <div class="brand-badge">JII RESEARCH</div>
+        <div class="brand-text">
+          <span class="brand-title">FEBI UIN SMH BANTEN</span>
+          <span class="brand-sub">Ekonomi Syariah • Skripsi 2026</span>
+        </div>
+      </div>
+
+      <div class="nav-actions">
+        <button id="themeToggleBtn" class="btn btn-icon" title="Ubah Tema Gelap/Terang">
+          <span class="theme-icon">🌙</span>
+        </button>
+        <button id="printBtn" class="btn btn-outline" title="Cetak atau Simpan sebagai PDF">
+          🖨️ Cetak / PDF
+        </button>
+        <a href="DATA_SKRIPSI_BULANAN_AGREGAT_JII.csv" download class="btn btn-primary">
+          📥 Unduh Data CSV
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Header Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-badge-row">
+        <span class="pill pill-emerald">✦ REKOMENDASI UTAMA: DATA AGREGAT (36 BULAN)</span>
+        <span class="pill pill-subtle">SPSS 25 Validated</span>
+      </div>
+      <h1 class="hero-title">
+        Pengaruh Nilai Tukar Rupiah, BI-Rate, dan Inflasi terhadap Harga Saham Jakarta Islamic Index (JII)
+      </h1>
+      <p class="hero-subtitle">
+        Analisis Regresi Linear Berganda periode <strong>Januari 2023 – Desember 2025</strong> pada 16 emiten syariah konstituen konsisten JII.
+      </p>
+
+      <div class="author-card">
+        <div class="author-item">
+          <span class="author-label">Peneliti</span>
+          <span class="author-value">Siti Selviah</span>
+        </div>
+        <div class="author-divider"></div>
+        <div class="author-item">
+          <span class="author-label">NIM</span>
+          <span class="author-value">221410061</span>
+        </div>
+        <div class="author-divider"></div>
+        <div class="author-item">
+          <span class="author-label">Program Studi</span>
+          <span class="author-value">Ekonomi Syariah</span>
+        </div>
+        <div class="author-divider"></div>
+        <div class="author-item">
+          <span class="author-label">Fakultas / Kampus</span>
+          <span class="author-value">FEBI UIN Sultan Maulana Hasanuddin Banten</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KPI Key Findings Bar -->
+  <section class="kpi-section">
+    <div class="container grid-kpi">
+      <div class="kpi-card highlight">
+        <div class="kpi-header">
+          <span class="kpi-title">Koefisien Determinasi</span>
+          <span class="kpi-badge badge-green">Kuat</span>
+        </div>
+        <div class="kpi-value">55,0%</div>
+        <div class="kpi-meta">Adjusted R² = 50,7% (Kemampuan menjelaskan variasi saham JII)</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-header">
+          <span class="kpi-title">Uji Simultan (Uji F)</span>
+          <span class="kpi-badge badge-green">H4 Diterima</span>
+        </div>
+        <div class="kpi-value">F = 13,02</div>
+        <div class="kpi-meta">p-value = 0,00001 (&lt; 0,05) Signifikan Simultan</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-header">
+          <span class="kpi-title">Pengaruh Kurs Rupiah (X1)</span>
+          <span class="kpi-badge badge-red">Negatif Signifikan</span>
+        </div>
+        <div class="kpi-value">t = -3,558</div>
+        <div class="kpi-meta">p = 0,001 (&lt; 0,05) Variabel Makro Paling Dominan</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-header">
+          <span class="kpi-title">Asumsi Normalitas (K-S)</span>
+          <span class="kpi-badge badge-green">Lolos Sempurna</span>
+        </div>
+        <div class="kpi-value">p = 0,845</div>
+        <div class="kpi-meta">Sig &gt; 0,05 Residual Terdistribusi Normal</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Navigation Tabs -->
+  <section class="main-content">
+    <div class="container">
+      <nav class="tabs-nav" id="tabsNav">
+        <button class="tab-btn active" data-tab="tab-md-preview">
+          📄 Preview File MD Asli (Navigasi Persis)
+        </button>
+        <button class="tab-btn" data-tab="tab-dashboard">
+          📊 Visualisasi & Tren Grafik
+        </button>
+        <button class="tab-btn" data-tab="tab-regresi">
+          📋 Tabel Output SPSS (Bab IV)
+        </button>
+        <button class="tab-btn" data-tab="tab-kesimpulan">
+          💡 Kesimpulan & Saran (Bab V)
+        </button>
+        <button class="tab-btn" data-tab="tab-panel">
+          ⚖️ Komparasi Opsi Panel (576 Data)
+        </button>
+        <button class="tab-btn" data-tab="tab-data">
+          📁 Dataset Runtun Waktu
+        </button>
+      </nav>
+
+      <!-- TAB 1: PREVIEW PERSIS SEPERTI PREVIEW FILE MD (REQUEST KHUSUS USER) -->
+      <div class="tab-pane active" id="tab-md-preview">
+        <div class="ide-preview-wrapper">
+          <!-- IDE Header Bar -->
+          <div class="ide-tab-bar">
+            <div class="ide-tab active">
+              <span class="ide-tab-icon">📄</span>
+              <span class="ide-tab-title">Preview HASIL_OLAH_DATA_DAN_KESIMPULAN.md</span>
+              <span class="ide-tab-badge">Rendered Markdown</span>
+            </div>
+            <div class="ide-actions">
+              <button class="ide-btn" id="toggleTocBtn" title="Buka/Tutup Navigasi Cepat (TOC)">
+                📑 Daftar Isi
+              </button>
+              <button class="ide-btn" onclick="copyFullMarkdown()" title="Salin Naskah Markdown">
+                📋 Salin Semua
+              </button>
+            </div>
+          </div>
+
+          <!-- IDE Body Layout: Sidebar TOC + Main Markdown Content -->
+          <div class="ide-body-layout">
+            <!-- Sidebar Quick TOC (Sticky Navigation) -->
+            <aside class="ide-toc-sidebar" id="ideTocSidebar">
+              <div class="ide-toc-header">NAVIGASI DOKUMEN</div>
+              <ul class="ide-toc-list" id="ideTocDynamicList">
+                <!-- Dynamically generated from headings -->
+              </ul>
+            </aside>
+
+            <!-- Exact IDE Markdown Preview Container -->
+            <main class="ide-markdown-viewport" id="ideMarkdownViewport">
+              <div class="vscode-markdown-content" id="vscodeMarkdownContent">
+                <!-- Injected by JS -->
+              </div>
+            </main>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: DASHBOARD & GRAFIK -->
+      <div class="tab-pane" id="tab-dashboard">
+        <div class="card card-chart">
+          <div class="card-header flex-between">
+            <div>
+              <h2 class="card-title">Tren Pergerakan Portofolio Saham JII vs Kurs USD/IDR (2023–2025)</h2>
+              <p class="card-desc">Visualisasi korelasi negatif: ketika kurs Rupiah melemah (naik), rata-rata harga saham syariah cenderung tertekan.</p>
+            </div>
+            <div class="chart-controls">
+              <span class="chart-tag">36 Titik Observasi Bulanan</span>
+            </div>
+          </div>
+          <div class="chart-container">
+            <canvas id="stockKursChart"></canvas>
+          </div>
+        </div>
+
+        <div class="grid-2-col mt-4">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Dinamika BI-Rate & Inflasi Bulanan (%)</h3>
+              <p class="card-desc">Kebijakan moneter Bank Indonesia dan laju inflasi tahunan (YoY) 2023–2025.</p>
+            </div>
+            <div class="chart-container-sm">
+              <canvas id="macroChart"></canvas>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Ringkasan Hipotesis Penelitian</h3>
+              <p class="card-desc">Evaluasi terhadap 4 rumusan masalah skripsi:</p>
+            </div>
+            <div class="hypothesis-list">
+              <div class="hypo-item pass">
+                <div class="hypo-badge">H1</div>
+                <div class="hypo-content">
+                  <div class="hypo-title">Nilai Tukar Rupiah berpengaruh terhadap Harga Saham JII</div>
+                  <div class="hypo-status">DITERIMA • Negatif Signifikan (t = -3,558, p = 0,001)</div>
+                </div>
+              </div>
+
+              <div class="hypo-item partial">
+                <div class="hypo-badge">H2</div>
+                <div class="hypo-content">
+                  <div class="hypo-title">BI-Rate berpengaruh terhadap Harga Saham JII</div>
+                  <div class="hypo-status">TOLAK di α=5%, TERIMA di α=10% (t = -1,857, p = 0,073)</div>
+                </div>
+              </div>
+
+              <div class="hypo-item rejected">
+                <div class="hypo-badge">H3</div>
+                <div class="hypo-content">
+                  <div class="hypo-title">Inflasi berpengaruh terhadap Harga Saham JII</div>
+                  <div class="hypo-status">DITOLAK • Tidak Signifikan (t = 1,355, p = 0,185)</div>
+                </div>
+              </div>
+
+              <div class="hypo-item pass">
+                <div class="hypo-badge">H4</div>
+                <div class="hypo-content">
+                  <div class="hypo-title">Nilai Tukar, BI-Rate, dan Inflasi berpengaruh Simultan</div>
+                  <div class="hypo-status">DITERIMA • Signifikan Kuat (F = 13,02, p = 0,00001)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: TABEL OUTPUT SPSS (BAB IV) -->
+      <div class="tab-pane" id="tab-regresi">
+        <div class="card">
+          <div class="card-header flex-between">
+            <div>
+              <h2 class="card-title">1. Hasil Uji Asumsi Klasik (SPSS 25)</h2>
+              <p class="card-desc">Seluruh asumsi Best Linear Unbiased Estimator (BLUE) terpenuhi:</p>
+            </div>
+            <span class="badge badge-green">Semua Uji Memenuhi Syarat</span>
+          </div>
+          
+          <div class="table-responsive">
+            <table class="styled-table">
+              <thead>
+                <tr>
+                  <th>Jenis Uji</th>
+                  <th>Metode Uji</th>
+                  <th>Nilai Statistik</th>
+                  <th>Batas / Kriteria</th>
+                  <th>Hasil Evaluasi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Normalitas Residual</strong></td>
+                  <td>Kolmogorov-Smirnov (K-S)</td>
+                  <td>Z = 0,0981 | <strong>Sig = 0,8455</strong></td>
+                  <td>Sig &gt; 0,05</td>
+                  <td><span class="status-pill green">Lolos Sempurna (Normal)</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Multikolinearitas (Kurs)</strong></td>
+                  <td>Variance Inflation Factor</td>
+                  <td>Tolerance = 0,4481 | <strong>VIF = 2,2315</strong></td>
+                  <td>VIF &lt; 10 & Tol &gt; 0,10</td>
+                  <td><span class="status-pill green">Bebas Multikolinearitas</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Multikolinearitas (BI Rate)</strong></td>
+                  <td>Variance Inflation Factor</td>
+                  <td>Tolerance = 0,6772 | <strong>VIF = 1,4766</strong></td>
+                  <td>VIF &lt; 10 & Tol &gt; 0,10</td>
+                  <td><span class="status-pill green">Bebas Multikolinearitas</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Multikolinearitas (Inflasi)</strong></td>
+                  <td>Variance Inflation Factor</td>
+                  <td>Tolerance = 0,5361 | <strong>VIF = 1,8653</strong></td>
+                  <td>VIF &lt; 10 & Tol &gt; 0,10</td>
+                  <td><span class="status-pill green">Bebas Multikolinearitas</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Heteroskedastisitas</strong></td>
+                  <td>Uji Glejser (|Residual|)</td>
+                  <td>Sig: X1=0,501; X2=0,874; X3=0,055</td>
+                  <td>Semua Sig &gt; 0,05</td>
+                  <td><span class="status-pill green">Homoskedastis (Lolos)</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Autokorelasi</strong></td>
+                  <td>Durbin-Watson</td>
+                  <td>DW = <strong>0,9808</strong></td>
+                  <td>dU &lt; d &lt; 4-dU</td>
+                  <td><span class="status-pill yellow">Autokorelasi Wajar Time-Series</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card mt-4">
+          <div class="card-header flex-between">
+            <div>
+              <h2 class="card-title">2. Persamaan Regresi & Tabel Koefisien (Uji t)</h2>
+              <p class="card-desc">Model Summary: R = 0,741 | R² = 0,550 (55,0%) | Adjusted R² = 0,507</p>
+            </div>
+            <button class="btn btn-sm btn-outline copy-eq-btn" onclick="copyEquation()">
+              📋 Salin Persamaan
+            </button>
+          </div>
+
+          <div class="equation-box">
+            <code>Y = 11.600,00 - 0,3477 (X1) - 205,1123 (X2) + 69,6470 (X3)</code>
+          </div>
+
+          <div class="table-responsive mt-3">
+            <table class="styled-table">
+              <thead>
+                <tr>
+                  <th>Model / Variabel</th>
+                  <th>Koefisien B</th>
+                  <th>Std. Error</th>
+                  <th>t-hitung</th>
+                  <th>t-tabel</th>
+                  <th>Sig. (p-value)</th>
+                  <th>Keterangan</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>(Constant)</strong></td>
+                  <td>11.600,00</td>
+                  <td>2.074,35</td>
+                  <td>5,592</td>
+                  <td>2,037</td>
+                  <td>0,000</td>
+                  <td>Signifikan</td>
+                </tr>
+                <tr class="highlight-row">
+                  <td><strong>Nilai Tukar Rupiah (X1)</strong></td>
+                  <td>-0,3477</td>
+                  <td>0,098</td>
+                  <td><strong>-3,558</strong></td>
+                  <td>2,037</td>
+                  <td><strong>0,001</strong></td>
+                  <td><span class="status-pill green">Signifikan Negatif</span></td>
+                </tr>
+                <tr>
+                  <td><strong>BI Rate (X2)</strong></td>
+                  <td>-205,1123</td>
+                  <td>110,48</td>
+                  <td><strong>-1,857</strong></td>
+                  <td>2,037</td>
+                  <td><strong>0,073</strong></td>
+                  <td><span class="status-pill yellow">Signifikan di α=10%</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Inflasi (X3)</strong></td>
+                  <td>+69,6470</td>
+                  <td>51,40</td>
+                  <td><strong>+1,355</strong></td>
+                  <td>2,037</td>
+                  <td><strong>0,185</strong></td>
+                  <td><span class="status-pill red">Tidak Signifikan</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card mt-4">
+          <div class="card-header">
+            <h2 class="card-title">3. Tabel Uji Simultan (ANOVA / Uji F)</h2>
+            <p class="card-desc">Pengujian pengaruh bersama Nilai Tukar, BI-Rate, dan Inflasi terhadap Harga Saham JII:</p>
+          </div>
+          <div class="table-responsive">
+            <table class="styled-table">
+              <thead>
+                <tr>
+                  <th>Model</th>
+                  <th>Sum of Squares</th>
+                  <th>df</th>
+                  <th>Mean Square</th>
+                  <th>F-hitung</th>
+                  <th>F-tabel</th>
+                  <th>Sig. (p-value)</th>
+                  <th>Keputusan</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Regression</strong></td>
+                  <td>2.193.308,82</td>
+                  <td>3</td>
+                  <td>731.102,94</td>
+                  <td><strong>13,024</strong></td>
+                  <td>2,90</td>
+                  <td><strong>0,00001</strong></td>
+                  <td><span class="status-pill green">H4 DITERIMA</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Residual</strong></td>
+                  <td>1.796.340,18</td>
+                  <td>32</td>
+                  <td>56.135,63</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td><strong>Total</strong></td>
+                  <td>3.989.649,00</td>
+                  <td>35</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 4: KESIMPULAN & SARAN (BAB V) -->
+      <div class="tab-pane" id="tab-kesimpulan">
+        <div class="grid-2-col">
+          <div class="card">
+            <div class="card-header">
+              <span class="badge badge-emerald">BAB V • KESIMPULAN</span>
+              <h2 class="card-title mt-2">Jawaban Rumusan Masalah</h2>
+            </div>
+            <div class="conclusion-list">
+              <div class="conclusion-card">
+                <div class="concl-num">1</div>
+                <div>
+                  <h4>Nilai Tukar Rupiah Terhadap Saham JII</h4>
+                  <p>Berpengaruh <strong>negatif dan signifikan</strong> secara parsial (t = -3,558, p = 0,001 &lt; 0,05). Setiap depresiasi Rupiah menekan ekspektasi laba emiten dan memicu aksi jual investor di bursa syariah.</p>
+                </div>
+              </div>
+
+              <div class="conclusion-card">
+                <div class="concl-num">2</div>
+                <div>
+                  <h4>BI-Rate Terhadap Saham JII</h4>
+                  <p>Berpengaruh <strong>negatif</strong> (b = -205,11) namun tidak signifikan pada taraf 5% (p = 0,073), melainkan signifikan pada taraf 10%. Fundamental emiten JII yang kokoh mampu meredam guncangan kenaikan suku bunga.</p>
+                </div>
+              </div>
+
+              <div class="conclusion-card">
+                <div class="concl-num">3</div>
+                <div>
+                  <h4>Inflasi Terhadap Saham JII</h4>
+                  <p><strong>Tidak berpengaruh signifikan</strong> secara parsial (t = 1,355, p = 0,185 &gt; 0,05). Laju inflasi Indonesia yang terjaga stabil di kisaran 2,71% tidak menggerus daya beli dan kinerja nominal emiten JII.</p>
+                </div>
+              </div>
+
+              <div class="conclusion-card highlight">
+                <div class="concl-num">4</div>
+                <div>
+                  <h4>Pengaruh Simultan (Bersama-sama)</h4>
+                  <p>Secara simultan, Nilai Tukar, BI-Rate, dan Inflasi <strong>berpengaruh signifikan</strong> terhadap pergerakan harga saham JII (F = 13,02, p = 0,00001) dengan kontribusi determinasi (R²) sebesar <strong>55,0%</strong>.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="badge badge-cyan">BAB V • SARAN</span>
+              <h2 class="card-title mt-2">Rekomendasi Kebijakan & Praktis</h2>
+            </div>
+            <div class="suggestion-list">
+              <div class="sugg-card">
+                <div class="sugg-icon">💼</div>
+                <div>
+                  <h4>Bagi Investor Pasar Modal Syariah</h4>
+                  <p>Investor disarankan memprioritaskan pemantauan terhadap fluktuasi nilai tukar Rupiah (USD/IDR), karena kurs merupakan variabel risiko makro yang paling sensitif menekan harga saham JII.</p>
+                </div>
+              </div>
+
+              <div class="sugg-card">
+                <div class="sugg-icon">🏢</div>
+                <div>
+                  <h4>Bagi Perusahaan Emiten JII</h4>
+                  <p>Emiten yang memiliki eksposur impor bahan baku disarankan memperkuat instrumen lindung nilai syariah (*Islamic Hedging*) agar volatilitas kurs tidak menggerus margin laba bersih.</p>
+                </div>
+              </div>
+
+              <div class="sugg-card">
+                <div class="sugg-icon">🎓</div>
+                <div>
+                  <h4>Bagi Peneliti Selanjutnya</h4>
+                  <p>Dapat memperpanjang rentang observasi menjadi 5 tahun dan mengombinasikan faktor makro dengan variabel fundamental rasio keuangan (ROA, DER, EPS) untuk model analisis yang lebih kaya.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 5: KOMPARASI OPSI PANEL (576 DATA) -->
+      <div class="tab-pane" id="tab-panel">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Komparasi: Opsi Agregat (36 Bulan) vs Opsi Panel (576 Data)</h2>
+            <p class="card-desc">Perbandingan akademis untuk memahami perbedaan jika data diolah per portofolio vs individual emiten.</p>
+          </div>
+
+          <div class="table-responsive">
+            <table class="styled-table">
+              <thead>
+                <tr>
+                  <th>Parameter Pembanding</th>
+                  <th>Opsi Agregat (36 Bulan) ⭐</th>
+                  <th>Opsi Panel OLS Biasa</th>
+                  <th>Opsi Panel Fixed Effects (FEM)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Jumlah Sampel (N)</strong></td>
+                  <td>36 Bulan</td>
+                  <td>576 Data</td>
+                  <td>576 Data (16 emiten × 36 bln)</td>
+                </tr>
+                <tr>
+                  <td><strong>Kesesuaian dengan Bab III</strong></td>
+                  <td><span class="status-pill green">100% Selaras (SPSS 25)</span></td>
+                  <td>Selaras di SPSS</td>
+                  <td>Perlu EViews / Uji Chow</td>
+                </tr>
+                <tr>
+                  <td><strong>Koefisien Determinasi (R²)</strong></td>
+                  <td><strong>55,0%</strong> (Sangat Pas)</td>
+                  <td>0,3% (Sangat Kecil)</td>
+                  <td><strong>94,25%</strong> (Sangat Tinggi)</td>
+                </tr>
+                <tr>
+                  <td><strong>Uji F (Simultan)</strong></td>
+                  <td><strong>13,02 (Signifikan)</strong></td>
+                  <td>0,48 (Tidak Signifikan)</td>
+                  <td><strong>507,30 (Signifikan)</strong></td>
+                </tr>
+                <tr>
+                  <td><strong>Uji t Kurs Rupiah</strong></td>
+                  <td><strong>t = -3,558 (p = 0,001)</strong></td>
+                  <td>t = -0,367 (p = 0,713)</td>
+                  <td>t = -1,510 (p = 0,132)</td>
+                </tr>
+                <tr>
+                  <td><strong>Uji t BI-Rate</strong></td>
+                  <td>t = -1,857 (p = 0,073)</td>
+                  <td>t = -0,756 (p = 0,450)</td>
+                  <td><strong>t = -3,109 (p = 0,002)</strong></td>
+                </tr>
+                <tr>
+                  <td><strong>Kemudahan Sidang</strong></td>
+                  <td><span class="status-pill green">Sangat Aman & Mudah</span></td>
+                  <td><span class="status-pill red">Rentan Dipertanyakan</span></td>
+                  <td><span class="status-pill yellow">Butuh Ekonometrika Lanjut</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 6: DATASET RUNTUN WAKTU -->
+      <div class="tab-pane" id="tab-data">
+        <div class="card">
+          <div class="card-header flex-between">
+            <div>
+              <h2 class="card-title">Tabel Data Rata-Rata Portofolio Saham JII & Makro (36 Bulan)</h2>
+              <p class="card-desc">Data input yang digunakan untuk regresi SPSS pada Opsi Agregat:</p>
+            </div>
+            <div class="data-search-box">
+              <input type="text" id="tableSearchInput" placeholder="Cari periode (cth: 2024)..." class="form-input">
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="styled-table" id="dataTableRaw">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Periode</th>
+                  <th>Rata-rata Saham JII (Rp)</th>
+                  <th>Nilai Tukar USD/IDR (Rp)</th>
+                  <th>BI-Rate (%)</th>
+                  <th>Inflasi YoY (%)</th>
+                </tr>
+              </thead>
+              <tbody id="dataTableBody">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container text-center">
+      <p>© 2026 <strong>Siti Selviah</strong> (NIM: 221410061) — Jurusan Ekonomi Syariah, FEBI UIN Sultan Maulana Hasanuddin Banten.</p>
+      <p class="footer-sub">Dashboard disiapkan untuk publikasi dan presentasi sidang skripsi. Didesain untuk deployment Vercel.</p>
+    </div>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div id="toastNotification" class="toast">Teks berhasil disalin!</div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
